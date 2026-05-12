@@ -1,0 +1,613 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+    <title>Amazon Quick View Pro | FBA Research Tool</title>
+    <meta name="description" content="Professional Amazon FBA product research tool. Real-time Buy Box, BSR, profit calculator, bulk ASIN checker, and multi-marketplace support.">
+    <meta name="keywords" content="Amazon FBA, product research, BSR checker, Buy Box, profit calculator, ASIN bulk check">
+    <meta name="author" content="QuickView Pro">
+    <!-- Google Fonts + Modern Inter -->
+    <link href="https://fonts.googleapis.com/css2?family=Inter:opsz,wght@14..32,300;14..32,400;14..32,500;14..32,600;14..32,700;14..32,800&display=swap" rel="stylesheet">
+    <!-- Font Awesome 6 (free) -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Inter', sans-serif;
+            background: #fafbfc;
+            color: #11181c;
+            scroll-behavior: smooth;
+            line-height: 1.5;
+        }
+
+        /* 2026 trends: glassmorphism, neubrutalism accent, micro-interactions */
+        .glass-nav {
+            background: rgba(255, 255, 255, 0.85);
+            backdrop-filter: blur(18px);
+            -webkit-backdrop-filter: blur(18px);
+            border-bottom: 1px solid rgba(0, 0, 0, 0.05);
+            position: sticky;
+            top: 0;
+            z-index: 100;
+        }
+
+        .container {
+            max-width: 1280px;
+            margin: 0 auto;
+            padding: 0 1.75rem;
+        }
+
+        .navbar {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 1rem 0;
+            flex-wrap: wrap;
+            gap: 1rem;
+        }
+
+        .logo {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .logo-icon {
+            width: 40px;
+            height: 40px;
+            background: linear-gradient(135deg, #ff9900, #ffb347);
+            border-radius: 14px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            box-shadow: 0 8px 18px rgba(255, 153, 0, 0.2);
+        }
+
+        .logo h1 {
+            font-size: 1.5rem;
+            font-weight: 700;
+            letter-spacing: -0.02em;
+            background: linear-gradient(135deg, #1e293b, #334155);
+            -webkit-background-clip: text;
+            background-clip: text;
+            color: transparent;
+        }
+
+        .nav-links {
+            display: flex;
+            gap: 2rem;
+            align-items: center;
+            flex-wrap: wrap;
+        }
+
+        .nav-links a {
+            text-decoration: none;
+            font-weight: 500;
+            color: #2c3e4e;
+            transition: 0.2s;
+            font-size: 0.95rem;
+        }
+
+        .nav-links a:hover {
+            color: #ff9900;
+        }
+
+        .btn-outline {
+            background: transparent;
+            border: 1.5px solid #ff9900;
+            padding: 0.5rem 1.25rem;
+            border-radius: 40px;
+            font-weight: 600;
+            color: #ff9900;
+            transition: 0.2s;
+            cursor: pointer;
+            display: inline-block;
+            text-decoration: none;
+        }
+
+        .btn-outline:hover {
+            background: #ff9900;
+            color: white;
+            transform: translateY(-2px);
+        }
+
+        .btn-primary {
+            background: linear-gradient(105deg, #ff9900, #ffb347);
+            border: none;
+            padding: 0.7rem 1.6rem;
+            border-radius: 40px;
+            font-weight: 600;
+            color: white;
+            cursor: pointer;
+            transition: all 0.2s ease;
+            box-shadow: 0 4px 10px rgba(255, 153, 0, 0.25);
+            text-decoration: none;
+            display: inline-block;
+        }
+
+        .btn-primary:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 12px 22px rgba(255, 153, 0, 0.3);
+        }
+
+        .hero {
+            padding: 4rem 0 5rem 0;
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 3rem;
+            align-items: center;
+        }
+
+        .hero-badge {
+            background: #eef2ff;
+            color: #ff9900;
+            display: inline-block;
+            padding: 0.25rem 1rem;
+            border-radius: 40px;
+            font-size: 0.8rem;
+            font-weight: 600;
+            margin-bottom: 1rem;
+        }
+
+        .hero h2 {
+            font-size: 3rem;
+            font-weight: 800;
+            letter-spacing: -0.03em;
+            line-height: 1.2;
+            background: linear-gradient(135deg, #0f172a, #2d3a4b);
+            -webkit-background-clip: text;
+            background-clip: text;
+            color: transparent;
+        }
+
+        .hero p {
+            font-size: 1.1rem;
+            color: #3a5468;
+            margin: 1.5rem 0;
+        }
+
+        .hero-stats {
+            display: flex;
+            gap: 2rem;
+            margin-top: 2rem;
+        }
+
+        .stat-number {
+            font-size: 1.9rem;
+            font-weight: 800;
+            color: #ff9900;
+        }
+
+        .mockup {
+            background: #ffffffd9;
+            border-radius: 2rem;
+            padding: 0.5rem;
+            box-shadow: 0 25px 45px -12px rgba(0, 0, 0, 0.2);
+            border: 1px solid rgba(255,255,240,0.5);
+        }
+
+        .mockup-inner {
+            background: #fff1e0;
+            border-radius: 1.5rem;
+            text-align: center;
+            padding: 1rem;
+        }
+
+        .badge-preview {
+            background: #f7f9fc;
+            margin-top: 1rem;
+            border-radius: 1rem;
+            padding: 1rem;
+            font-family: monospace;
+            font-size: 0.8rem;
+            text-align: left;
+        }
+
+        .section {
+            padding: 5rem 0;
+            border-bottom: 1px solid #e9edf2;
+        }
+
+        .section-title {
+            text-align: center;
+            font-size: 2.2rem;
+            font-weight: 700;
+            letter-spacing: -0.02em;
+            margin-bottom: 3rem;
+        }
+
+        .features-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(290px, 1fr));
+            gap: 2rem;
+        }
+
+        .feature-card {
+            background: white;
+            padding: 1.8rem;
+            border-radius: 2rem;
+            transition: all 0.3s;
+            box-shadow: 0 5px 20px rgba(0, 0, 0, 0.02);
+            border: 1px solid #eff3f8;
+        }
+
+        .feature-card:hover {
+            transform: translateY(-6px);
+            border-color: #ffdd99;
+            box-shadow: 0 20px 30px -12px rgba(0, 0, 0, 0.08);
+        }
+
+        .feature-icon {
+            font-size: 2.2rem;
+            background: #fff5e6;
+            width: 55px;
+            height: 55px;
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            border-radius: 18px;
+            margin-bottom: 1.2rem;
+            color: #ff9900;
+        }
+
+        .marketplace-badge {
+            background: #f1f5f9;
+            border-radius: 100px;
+            padding: 0.3rem 1rem;
+            font-size: 0.75rem;
+            font-weight: 500;
+            display: inline-block;
+            margin: 0.2rem;
+        }
+
+        .pricing-card {
+            background: rgba(255, 255, 255, 0.85);
+            backdrop-filter: blur(4px);
+            border-radius: 2rem;
+            padding: 2rem;
+            text-align: center;
+            border: 1px solid rgba(255, 153, 0, 0.25);
+            transition: transform 0.2s;
+        }
+
+        .pricing-card:hover {
+            transform: translateY(-5px);
+        }
+
+        .pricing-card ul {
+            list-style: none;
+            margin: 1rem 0;
+        }
+
+        .pricing-card li {
+            margin: 0.5rem 0;
+        }
+
+        .faq-item {
+            background: white;
+            border-radius: 1.25rem;
+            margin-bottom: 1rem;
+            border: 1px solid #edf2f7;
+        }
+
+        .faq-question {
+            padding: 1.2rem 1.5rem;
+            font-weight: 600;
+            cursor: pointer;
+            display: flex;
+            justify-content: space-between;
+        }
+
+        .faq-answer {
+            padding: 0 1.5rem 1.5rem 1.5rem;
+            color: #4a5b6e;
+            display: none;
+        }
+
+        .footer {
+            background: #0c1117;
+            color: #b9c7d4;
+            padding: 3rem 0 2rem;
+        }
+
+        .footer a {
+            color: #ffaa44;
+            text-decoration: none;
+        }
+
+        .modal-overlay {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0,0,0,0.7);
+            backdrop-filter: blur(8px);
+            z-index: 1000;
+            display: none;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .modal-content {
+            background: #fff;
+            max-width: 700px;
+            width: 90%;
+            max-height: 85vh;
+            overflow-y: auto;
+            border-radius: 2rem;
+            padding: 2rem;
+            position: relative;
+        }
+
+        .modal-close {
+            position: sticky;
+            top: 0;
+            text-align: right;
+            font-size: 1.8rem;
+            cursor: pointer;
+            float: right;
+        }
+
+        @media (max-width: 800px) {
+            .hero {
+                grid-template-columns: 1fr;
+                text-align: center;
+            }
+            .hero-stats { justify-content: center; }
+            .nav-links { gap: 1.2rem; }
+            .section-title { font-size: 1.8rem; }
+            .hero h2 { font-size: 2.2rem; }
+        }
+    </style>
+</head>
+<body>
+
+<nav class="glass-nav">
+    <div class="container">
+        <div class="navbar">
+            <div class="logo">
+                <div class="logo-icon"><i class="fas fa-chart-line" style="color:white; font-size: 1.4rem;"></i></div>
+                <h1>QuickView Pro</h1>
+            </div>
+            <div class="nav-links">
+                <a href="#features">Features</a>
+                <a href="#marketplaces">Marketplaces</a>
+                <a href="#pricing">Pricing</a>
+                <a href="#" id="privacyLink">Privacy</a>
+                <a href="#" id="termsLink">Terms</a>
+                <a href="#" class="btn-outline" id="installBtn"><i class="fab fa-chrome"></i> Add to Chrome</a>
+            </div>
+        </div>
+    </div>
+</nav>
+
+<main>
+    <div class="container">
+        <div class="hero">
+            <div>
+                <span class="hero-badge"><i class="fas fa-bolt"></i> Powering 5,000+ Amazon Sellers</span>
+                <h2>Decode Amazon FBA<br>in seconds, not hours.</h2>
+                <p>Real-time Buy Box, BSR, profit margins, hazmat alerts & bulk ASIN checks — all inside your Amazon search & product pages.</p>
+                <div style="display: flex; gap: 1rem; flex-wrap: wrap; justify-content: flex-start;">
+                    <a href="#" class="btn-primary" id="installCta"><i class="fab fa-chrome"></i> Install for free</a>
+                    <a href="#features" class="btn-outline" style="border-color:#cbd5e1; color:#2c3e4e;">Explore features →</a>
+                </div>
+                <div class="hero-stats">
+                    <div><div class="stat-number">22+</div><div>Marketplaces</div></div>
+                    <div><div class="stat-number">500</div><div>ASINs/day</div></div>
+                    <div><div class="stat-number">1-click</div><div>Profit analysis</div></div>
+                </div>
+            </div>
+            <div class="mockup">
+                <div class="mockup-inner">
+                    <i class="fas fa-search" style="font-size:2rem; color:#ff9900;"></i>
+                    <div class="badge-preview">
+                        📦 ASIN: B09XW9ZPCT | ⭐ 4.7 (2,341 reviews)<br>
+                        💰 Net profit: +$12.40 | Margin: 28%<br>
+                        🛒 Buy Box: Amazon (verified) ✅ FBA
+                    </div>
+                    <p style="margin-top:0.7rem; font-size:0.8rem;">Live badge injection on Amazon</p>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="section" id="features">
+        <div class="container">
+            <div class="section-title">Everything you need to source smarter ✨</div>
+            <div class="features-grid">
+                <div class="feature-card"><div class="feature-icon"><i class="fas fa-chart-simple"></i></div><h3>Profit Calculator</h3><p>Real-time net profit, ROI & margin based on your custom COGS, ads, FBA fees & quantity.</p></div>
+                <div class="feature-card"><div class="feature-icon"><i class="fas fa-medal"></i></div><h3>BSR & Category Rank</h3><p>Multi-category BSR extraction, includes 20+ Amazon domains with automatic fallback.</p></div>
+                <div class="feature-card"><div class="feature-icon"><i class="fas fa-cart-shopping"></i></div><h3>Buy Box & Seller check</h3><p>Know instantly if Amazon owns the Buy Box, FBA or FBM, with verification badge.</p></div>
+                <div class="feature-card"><div class="feature-icon"><i class="fas fa-barcode"></i></div><h3>Bulk ASIN Checker</h3><p>Test up to 500 ASINs/day, 30s cooldown, automatic CAPTCHA handling and CSV export.</p></div>
+                <div class="feature-card"><div class="feature-icon"><i class="fas fa-layer-group"></i></div><h3>Multi-Profile system</h3><p>Create unlimited research profiles (Electronics, Clothing, EU vs US) with own cost structure.</p></div>
+                <div class="feature-card"><div class="feature-icon"><i class="fas fa-globe-americas"></i></div><h3>22+ Marketplaces</h3><p>USD conversion, local currency symbols & domain-specific number formatting.</p></div>
+            </div>
+        </div>
+    </div>
+
+    <div class="section" id="marketplaces" style="background:#f8fafd;">
+        <div class="container">
+            <div class="section-title">Supported worldwide 🌎</div>
+            <div style="display: flex; flex-wrap: wrap; gap: 0.5rem; justify-content: center; margin-bottom: 2rem;">
+                <span class="marketplace-badge">🇺🇸 amazon.com</span>
+                <span class="marketplace-badge">🇬🇧 amazon.co.uk</span>
+                <span class="marketplace-badge">🇩🇪 amazon.de</span>
+                <span class="marketplace-badge">🇫🇷 amazon.fr</span>
+                <span class="marketplace-badge">🇨🇦 amazon.ca</span>
+                <span class="marketplace-badge">🇯🇵 amazon.co.jp</span>
+                <span class="marketplace-badge">🇮🇳 amazon.in</span>
+                <span class="marketplace-badge">🇧🇷 amazon.com.br</span>
+                <span class="marketplace-badge">🇦🇪 amazon.ae</span>
+                <span class="marketplace-badge">🇸🇬 amazon.sg</span>
+                <span class="marketplace-badge">🇲🇽 amazon.com.mx</span>
+                <span class="marketplace-badge">🇵🇱 amazon.pl</span>
+                <span class="marketplace-badge">🇹🇷 amazon.com.tr</span>
+                <span class="marketplace-badge">🇪🇸 amazon.es</span>
+                <span class="marketplace-badge">🇮🇹 amazon.it</span>
+                <span class="marketplace-badge">🇳🇱 amazon.nl</span>
+                <span class="marketplace-badge">🇧🇪 amazon.be</span>
+                <span class="marketplace-badge">🇸🇪 amazon.se</span>
+                <span class="marketplace-badge">🇦🇺 amazon.com.au</span>
+                <span class="marketplace-badge">🇪🇬 amazon.eg</span>
+                <span class="marketplace-badge">🇮🇪 amazon.ie</span>
+            </div>
+            <p style="text-align:center; font-size:0.9rem; color:#4a5b6e;">+ automatic referral minimum fees, currency conversion & localized BSR extraction.</p>
+        </div>
+    </div>
+
+    <div class="section" id="pricing">
+        <div class="container">
+            <div class="section-title">Start free, upgrade as you grow 🚀</div>
+            <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 2rem;">
+                <div class="pricing-card">
+                    <h3>Free Plan</h3>
+                    <div style="font-size:2.2rem; font-weight:800;">$0 <span style="font-size:1rem;">/month</span></div>
+                    <ul>
+                        <li>✅ Daily 100 ASIN checks</li>
+                        <li>✅ 2 Research Profiles</li>
+                        <li>✅ Basic BSR & Buy Box</li>
+                        <li>✅ 22 marketplaces</li>
+                    </ul>
+                    <div class="btn-outline" style="background:#64748b; border-color:#64748b; color:white; cursor:default;">Current plan</div>
+                </div>
+                <div class="pricing-card" style="border:2px solid #ffcc88;">
+                    <h3>Pro Seller</h3>
+                    <div style="font-size:2.2rem; font-weight:800;">$12 <span style="font-size:1rem;">/month</span></div>
+                    <ul>
+                        <li>✅ 500 ASINs/day (Bulk)</li>
+                        <li>✅ Unlimited profiles + Categories</li>
+                        <li>✅ Advanced profit analytics</li>
+                        <li>✅ CSV export + Cloud sync</li>
+                    </ul>
+                    <a href="#" class="btn-primary" style="display:inline-block;">Upgrade →</a>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="section" style="border-bottom: none;">
+        <div class="container">
+            <div class="section-title">Got questions? We've got answers.</div>
+            <div id="faqContainer">
+                <div class="faq-item"><div class="faq-question">🛡️ Is my Amazon data safe? <span>+</span></div><div class="faq-answer">Absolutely. QuickView Pro does not collect any seller credentials. All data stays locally or on Chrome storage, no external servers except for exchange rates & optional bulk checks.</div></div>
+                <div class="faq-item"><div class="faq-question">🌍 Which Amazon domains are supported? <span>+</span></div><div class="faq-answer">All major 22+ marketplaces, including India, Japan, Brazil, Australia, and emerging markets like Egypt, Saudi Arabia and Belgium.</div></div>
+                <div class="faq-item"><div class="faq-question">💸 How does profit calculation work? <span>+</span></div><div class="faq-answer">You enter your product cost, shipping, ads, and return rate per profile. The extension then calculates referral fee (+minimum fee), FBA fee, storage, additional costs and quantity multiplier to show real net profit and ROI.</div></div>
+                <div class="faq-item"><div class="faq-question">🔍 Can I test 500 ASINs at once? <span>+</span></div><div class="faq-answer">Yes, the Pro tier supports up to 500 ASINs per day with smart throttling (30s cooldown batches) and automatic CAPTCHA detection.</div></div>
+            </div>
+        </div>
+    </div>
+</main>
+
+<footer class="footer">
+    <div class="container">
+        <div style="display: flex; justify-content: space-between; flex-wrap: wrap; gap: 2rem;">
+            <div><i class="fas fa-chart-line"></i> Amazon Quick View Pro © 2026<br><span style="font-size:0.75rem;">Unofficial Amazon partner tool</span></div>
+            <div><strong>Legal</strong><br><a href="#" id="privacyFooter">Privacy Policy</a><br><a href="#" id="termsFooter">Terms of Service</a></div>
+            <div><strong>Contact</strong><br><i class="fas fa-envelope"></i> support@quickviewpro.dev</div>
+        </div>
+        <div style="margin-top: 2rem; font-size:0.7rem; text-align:center;">Amazon, FBA, and the Amazon logo are trademarks of Amazon.com, Inc. This extension is not affiliated with Amazon.</div>
+    </div>
+</footer>
+
+<div id="privacyModal" class="modal-overlay">
+    <div class="modal-content">
+        <div class="modal-close">&times;</div>
+        <h2>Privacy Policy</h2>
+        <p><strong>Last updated:</strong> May 2026</p>
+        <p>Amazon Quick View Pro respects your privacy. This extension does not collect, store, or share any personally identifiable information. All research profiles, product bookmarks, and settings are stored locally in your browser using Chrome's sync storage. No data is transmitted to external servers except for optional exchange rate fetching (via Cloudflare Worker) and bulk ASIN checks performed through our GDPR-compliant proxy worker which does NOT log ASINs permanently. We do not track browsing history or share any data with third parties.</p>
+        <p><strong>Data usage:</strong> The extension accesses Amazon product pages only when you actively browse them. No analytics, no cookies.</p>
+        <p>By using this extension, you agree to the local storage of your research profiles.</p>
+        <p><strong>Data Deletion:</strong> All data can be removed by uninstalling the extension or clearing Chrome's storage.</p>
+    </div>
+</div>
+
+<div id="termsModal" class="modal-overlay">
+    <div class="modal-content">
+        <div class="modal-close">&times;</div>
+        <h2>Terms of Service</h2>
+        <p><strong>1. License</strong>: Amazon Quick View Pro is provided as a Chrome extension for legitimate product research. You may not reverse-engineer, resell, or redistribute the extension.</p>
+        <p><strong>2. Disclaimer</strong>: The profit calculator provides estimates based on your inputs and Amazon fee structure. Actual fees may vary. We are not liable for sourcing decisions made using this tool.</p>
+        <p><strong>3. Fair Use</strong>: Bulk ASIN checker respects Amazon's rate limits; users are responsible for complying with Amazon's Terms of Service.</p>
+        <p><strong>4. Updates</strong>: We may update fees data or features. Continued use constitutes acceptance of updated terms.</p>
+        <p><strong>5. Termination</strong>: Violation of terms may result in blocking access to upgrade features.</p>
+        <p><strong>6. Limitation of Liability</strong>: To the maximum extent permitted by law, we shall not be liable for any indirect, incidental, or consequential damages.</p>
+    </div>
+</div>
+
+<script>
+    // FAQ toggle
+    const faqs = document.querySelectorAll('.faq-question');
+    faqs.forEach(q => {
+        q.addEventListener('click', () => {
+            const answer = q.nextElementSibling;
+            const plus = q.querySelector('span');
+            if(answer.style.display === 'block') {
+                answer.style.display = 'none';
+                plus.textContent = '+';
+            } else {
+                answer.style.display = 'block';
+                plus.textContent = '−';
+            }
+        });
+    });
+
+    // Modal logic
+    const privacyModal = document.getElementById('privacyModal');
+    const termsModal = document.getElementById('termsModal');
+    const privacyLink = document.getElementById('privacyLink');
+    const privacyFooter = document.getElementById('privacyFooter');
+    const termsLink = document.getElementById('termsLink');
+    const termsFooter = document.getElementById('termsFooter');
+    const closeBtns = document.querySelectorAll('.modal-close');
+
+    function openModal(modal) { modal.style.display = 'flex'; document.body.style.overflow = 'hidden'; }
+    function closeModal(modal) { modal.style.display = 'none'; document.body.style.overflow = ''; }
+    
+    if(privacyLink) privacyLink.onclick = (e) => { e.preventDefault(); openModal(privacyModal); };
+    if(privacyFooter) privacyFooter.onclick = (e) => { e.preventDefault(); openModal(privacyModal); };
+    if(termsLink) termsLink.onclick = (e) => { e.preventDefault(); openModal(termsModal); };
+    if(termsFooter) termsFooter.onclick = (e) => { e.preventDefault(); openModal(termsModal); };
+    
+    closeBtns.forEach(btn => {
+        btn.onclick = (e) => {
+            const modalParent = btn.closest('.modal-overlay');
+            if(modalParent) closeModal(modalParent);
+        };
+    });
+    
+    window.onclick = (e) => {
+        if(e.target.classList.contains('modal-overlay')) closeModal(e.target);
+    };
+    
+    // Chrome Web Store link - Replace YOUR_EXTENSION_ID with actual ID
+    const chromeUrl = "https://chrome.google.com/webstore/detail/amazon-quick-view-pro/YOUR_EXTENSION_ID";
+    const installBtns = document.querySelectorAll('#installCta, #installBtn');
+    installBtns.forEach(btn => {
+        btn.href = chromeUrl;
+        btn.target = "_blank";
+    });
+    
+    // Smooth scroll
+    document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+        anchor.addEventListener('click', function(e) {
+            const targetId = this.getAttribute('href');
+            if(targetId && targetId !== '#' && targetId !== '#features' && targetId !== '#marketplaces' && targetId !== '#pricing') {
+                const targetEl = document.querySelector(targetId);
+                if(targetEl) {
+                    e.preventDefault();
+                    targetEl.scrollIntoView({ behavior: 'smooth', block: 'start' });
+                }
+            }
+        });
+    });
+</script>
+</body>
+</html>
