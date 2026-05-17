@@ -11,6 +11,8 @@
     <link href="https://fonts.googleapis.com/css2?family=Inter:opsz,wght@14..32,300;14..32,400;14..32,500;14..32,600;14..32,700;14..32,800&display=swap" rel="stylesheet">
     <!-- Font Awesome 6 (free) -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+    <!-- Paddle.js for Checkout Integration -->
+    <script src="https://cdn.paddle.com/paddle/v2/paddle.js"></script>
     <style>
         * {
             margin: 0;
@@ -355,6 +357,111 @@
             float: right;
         }
 
+        /* Checkout Modal Styles */
+        .checkout-modal-overlay {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0,0,0,0.85);
+            backdrop-filter: blur(12px);
+            z-index: 2000;
+            display: none;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .checkout-modal-content {
+            background: white;
+            width: 90%;
+            max-width: 550px;
+            border-radius: 2rem;
+            padding: 2rem;
+            position: relative;
+            text-align: center;
+            animation: modalSlideUp 0.3s ease;
+        }
+
+        @keyframes modalSlideUp {
+            from {
+                opacity: 0;
+                transform: translateY(30px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        .checkout-close {
+            position: absolute;
+            top: 1rem;
+            right: 1.5rem;
+            font-size: 1.8rem;
+            cursor: pointer;
+            color: #94a3b8;
+            transition: color 0.2s;
+        }
+
+        .checkout-close:hover {
+            color: #ef4444;
+        }
+
+        .checkout-icon {
+            font-size: 4rem;
+            background: linear-gradient(135deg, #ff9900, #ffb347);
+            width: 80px;
+            height: 80px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin: 0 auto 1rem;
+            box-shadow: 0 8px 20px rgba(255, 153, 0, 0.3);
+        }
+
+        .checkout-icon i {
+            color: white;
+            font-size: 2.2rem;
+        }
+
+        .checkout-title {
+            font-size: 1.6rem;
+            font-weight: 700;
+            margin-bottom: 0.5rem;
+        }
+
+        .checkout-price {
+            font-size: 2rem;
+            font-weight: 800;
+            color: #ff9900;
+            margin: 0.5rem 0;
+        }
+
+        .checkout-features {
+            background: #f8fafc;
+            border-radius: 1rem;
+            padding: 1rem;
+            text-align: left;
+            margin: 1.5rem 0;
+        }
+
+        .checkout-features li {
+            margin: 0.5rem 0;
+            font-size: 0.9rem;
+        }
+
+        .paddle-button-container {
+            margin: 1.5rem 0;
+        }
+
+        .checkout-note {
+            font-size: 0.75rem;
+            color: #64748b;
+            margin-top: 1rem;
+        }
+
         @media (max-width: 800px) {
             .hero {
                 grid-template-columns: 1fr;
@@ -487,7 +594,7 @@
                         <li>✅ Advanced profit analytics</li>
                         <li>✅ CSV export + Cloud sync</li>
                     </ul>
-                    <a href="#" class="btn-primary" style="display:inline-block;">Upgrade →</a>
+                    <a href="#" class="btn-primary" id="upgradeBtn" style="display:inline-block;">Upgrade →</a>
                 </div>
             </div>
         </div>
@@ -517,6 +624,7 @@
     </div>
 </footer>
 
+<!-- Privacy Modal -->
 <div id="privacyModal" class="modal-overlay">
     <div class="modal-content">
         <div class="modal-close">&times;</div>
@@ -529,6 +637,7 @@
     </div>
 </div>
 
+<!-- Terms Modal -->
 <div id="termsModal" class="modal-overlay">
     <div class="modal-content">
         <div class="modal-close">&times;</div>
@@ -539,6 +648,35 @@
         <p><strong>4. Updates</strong>: We may update fees data or features. Continued use constitutes acceptance of updated terms.</p>
         <p><strong>5. Termination</strong>: Violation of terms may result in blocking access to upgrade features.</p>
         <p><strong>6. Limitation of Liability</strong>: To the maximum extent permitted by law, we shall not be liable for any indirect, incidental, or consequential damages.</p>
+    </div>
+</div>
+
+<!-- Checkout Modal (Paddle.js Integration) -->
+<div id="checkoutModal" class="checkout-modal-overlay">
+    <div class="checkout-modal-content">
+        <div class="checkout-close" id="checkoutCloseBtn">&times;</div>
+        <div class="checkout-icon">
+            <i class="fas fa-crown"></i>
+        </div>
+        <div class="checkout-title">QuickView Pro</div>
+        <div class="checkout-price">$14 <span style="font-size: 1rem;">/month</span></div>
+        <div class="checkout-features">
+            <ul style="list-style: none;">
+                <li>✅ <strong>500 ASINs/day</strong> bulk checks</li>
+                <li>✅ <strong>Unlimited</strong> research profiles</li>
+                <li>✅ Advanced profit analytics & ROI</li>
+                <li>✅ CSV export + Cloud sync</li>
+                <li>✅ 7-day free trial</li>
+            </ul>
+        </div>
+        <div class="paddle-button-container" id="paddleButtonContainer">
+            <a href="#!" class="btn-primary" id="paddleCheckoutButton" style="display: inline-block; width: 100%; text-align: center;">
+                Start 7-Day Free Trial →
+            </a>
+        </div>
+        <div class="checkout-note">
+            🔒 Secure checkout powered by Paddle. No commitment, cancel anytime.
+        </div>
     </div>
 </div>
 
@@ -559,7 +697,7 @@
         });
     });
 
-    // Modal logic
+    // Modal logic for Privacy & Terms
     const privacyModal = document.getElementById('privacyModal');
     const termsModal = document.getElementById('termsModal');
     const privacyLink = document.getElementById('privacyLink');
@@ -585,9 +723,62 @@
     
     window.onclick = (e) => {
         if(e.target.classList.contains('modal-overlay')) closeModal(e.target);
+        if(e.target.classList.contains('checkout-modal-overlay')) closeCheckoutModal();
     };
     
-    // Chrome Web Store link - Replace YOUR_EXTENSION_ID with actual ID
+    // Checkout Modal Integration with Paddle.js
+    const checkoutModal = document.getElementById('checkoutModal');
+    const upgradeBtn = document.getElementById('upgradeBtn');
+    const checkoutCloseBtn = document.getElementById('checkoutCloseBtn');
+    
+    // IMPORTANT: Replace with your actual Paddle Price ID from Paddle Dashboard
+    // Format: pri_xxxxxxxxxxxxx (from Catalog -> Product -> Prices)
+    const PADDLE_PRICE_ID = 'pri_xxxxxxxxxxxxx'; // ← REPLACE WITH YOUR REAL PRICE ID
+    
+    function openCheckoutModal(e) {
+        if(e) e.preventDefault();
+        checkoutModal.style.display = 'flex';
+        document.body.style.overflow = 'hidden';
+        
+        // Initialize Paddle with client-side token
+        // IMPORTANT: Replace with your actual Paddle Client-Side Token
+        // Get it from Paddle Dashboard → Developer Tools → Client-side Token
+        const PADDLE_CLIENT_TOKEN = 'paddle_client_token_placeholder'; // ← REPLACE WITH YOUR REAL TOKEN
+        
+        Paddle.Environment.set('sandbox'); // Remove this line for production
+        Paddle.Initialize({
+            token: PADDLE_CLIENT_TOKEN,
+            eventCallback: function(event) {
+                console.log('Paddle event:', event);
+                if (event.name === 'checkout.closed') {
+                    // Checkout was completed or closed
+                    closeCheckoutModal();
+                }
+            }
+        });
+        
+        // Setup the button with Paddle
+        const paddleBtn = document.getElementById('paddleCheckoutButton');
+        if(paddleBtn) {
+            paddleBtn.setAttribute('data-price-id', PADDLE_PRICE_ID);
+            paddleBtn.classList.add('paddle_button');
+        }
+    }
+    
+    function closeCheckoutModal() {
+        checkoutModal.style.display = 'none';
+        document.body.style.overflow = '';
+    }
+    
+    if(upgradeBtn) {
+        upgradeBtn.onclick = openCheckoutModal;
+    }
+    
+    if(checkoutCloseBtn) {
+        checkoutCloseBtn.onclick = closeCheckoutModal;
+    }
+    
+    // Chrome Web Store link - Replace YOUR_EXTENSION_ID with actual extension ID
     const chromeUrl = "https://chrome.google.com/webstore/detail/amazon-quick-view-pro/YOUR_EXTENSION_ID";
     const installBtns = document.querySelectorAll('#installCta, #installBtn');
     installBtns.forEach(btn => {
@@ -608,6 +799,13 @@
             }
         });
     });
+    
+    // Log to console for debugging - remove in production
+    console.log('QuickView Pro website loaded. Paddle.js integrated.');
+    console.log('To activate checkout:');
+    console.log('1. Replace PADDLE_PRICE_ID with your actual Price ID from Paddle Dashboard');
+    console.log('2. Replace PADDLE_CLIENT_TOKEN with your actual Client-side Token');
+    console.log('3. Change Paddle.Environment.set("sandbox") to production when ready');
 </script>
 </body>
 </html>
