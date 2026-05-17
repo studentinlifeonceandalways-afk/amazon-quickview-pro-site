@@ -1,0 +1,612 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+    <title>QuickView Pro - Secure Checkout</title>
+    <meta name="description" content="Complete your QuickView Pro subscription securely with Paddle">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:opsz,wght@14..32,300;14..32,400;14..32,500;14..32,600;14..32,700;14..32,800&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+    
+    <!-- Paddle.js - Required for checkout -->
+    <script src="https://cdn.paddle.com/paddle/v2/paddle.js"></script>
+    
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Inter', sans-serif;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            min-height: 100vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            padding: 2rem;
+        }
+
+        .checkout-container {
+            max-width: 520px;
+            width: 100%;
+            margin: 0 auto;
+        }
+
+        .checkout-card {
+            background: white;
+            border-radius: 32px;
+            overflow: hidden;
+            box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.25);
+            animation: slideUp 0.4s ease-out;
+        }
+
+        @keyframes slideUp {
+            from {
+                opacity: 0;
+                transform: translateY(20px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        .checkout-header {
+            background: linear-gradient(135deg, #ff9900, #ffb347);
+            padding: 32px;
+            text-align: center;
+            color: white;
+        }
+
+        .logo-icon {
+            width: 56px;
+            height: 56px;
+            background: rgba(255, 255, 255, 0.2);
+            border-radius: 18px;
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            margin-bottom: 16px;
+        }
+
+        .logo-icon i {
+            font-size: 28px;
+        }
+
+        .checkout-header h1 {
+            font-size: 24px;
+            font-weight: 700;
+            margin-bottom: 8px;
+        }
+
+        .checkout-header p {
+            font-size: 14px;
+            opacity: 0.9;
+        }
+
+        .checkout-body {
+            padding: 32px;
+        }
+
+        .plan-summary {
+            background: #f8fafc;
+            border-radius: 20px;
+            padding: 20px;
+            margin-bottom: 24px;
+            border: 1px solid #eef2f6;
+        }
+
+        .plan-name {
+            font-size: 18px;
+            font-weight: 700;
+            color: #1e293b;
+            margin-bottom: 8px;
+        }
+
+        .plan-price {
+            font-size: 32px;
+            font-weight: 800;
+            color: #ff9900;
+        }
+
+        .plan-price span {
+            font-size: 14px;
+            font-weight: 400;
+            color: #64748b;
+        }
+
+        .trial-badge {
+            display: inline-block;
+            background: #dcfce7;
+            color: #166534;
+            font-size: 12px;
+            font-weight: 600;
+            padding: 4px 12px;
+            border-radius: 20px;
+            margin-top: 8px;
+        }
+
+        .features-list {
+            list-style: none;
+            margin-top: 16px;
+        }
+
+        .features-list li {
+            padding: 8px 0;
+            font-size: 14px;
+            color: #475569;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .features-list li i {
+            color: #10b981;
+            width: 18px;
+        }
+
+        .form-group {
+            margin-bottom: 20px;
+        }
+
+        .form-group label {
+            display: block;
+            font-size: 13px;
+            font-weight: 600;
+            color: #1e293b;
+            margin-bottom: 8px;
+        }
+
+        .form-group input {
+            width: 100%;
+            padding: 14px 16px;
+            border: 2px solid #e2e8f0;
+            border-radius: 14px;
+            font-size: 15px;
+            transition: all 0.2s;
+            font-family: 'Inter', sans-serif;
+        }
+
+        .form-group input:focus {
+            outline: none;
+            border-color: #ff9900;
+            box-shadow: 0 0 0 3px rgba(255, 153, 0, 0.1);
+        }
+
+        .form-group input.error {
+            border-color: #ef4444;
+        }
+
+        .error-message {
+            color: #ef4444;
+            font-size: 12px;
+            margin-top: 6px;
+            display: none;
+        }
+
+        .btn-checkout {
+            width: 100%;
+            background: linear-gradient(135deg, #ff9900, #ffb347);
+            border: none;
+            padding: 16px;
+            border-radius: 40px;
+            font-weight: 700;
+            font-size: 16px;
+            color: white;
+            cursor: pointer;
+            transition: all 0.2s ease;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 8px;
+            font-family: 'Inter', sans-serif;
+        }
+
+        .btn-checkout:hover:not(:disabled) {
+            transform: translateY(-2px);
+            box-shadow: 0 10px 25px -5px rgba(255, 153, 0, 0.3);
+        }
+
+        .btn-checkout:disabled {
+            opacity: 0.7;
+            cursor: not-allowed;
+        }
+
+        .loader {
+            display: inline-block;
+            width: 18px;
+            height: 18px;
+            border: 2px solid rgba(255, 255, 255, 0.3);
+            border-radius: 50%;
+            border-top-color: white;
+            animation: spin 0.6s linear infinite;
+        }
+
+        @keyframes spin {
+            to { transform: rotate(360deg); }
+        }
+
+        .secure-badge {
+            text-align: center;
+            margin-top: 20px;
+            font-size: 12px;
+            color: #94a3b8;
+        }
+
+        .secure-badge i {
+            margin-right: 4px;
+        }
+
+        .status-container {
+            background: #fef3c7;
+            border-radius: 14px;
+            padding: 14px;
+            margin-bottom: 20px;
+            display: none;
+            align-items: center;
+            gap: 12px;
+            font-size: 13px;
+            color: #92400e;
+        }
+
+        .status-container.error {
+            background: #fee2e2;
+            color: #991b1b;
+        }
+
+        .status-container.success {
+            background: #dcfce7;
+            color: #166534;
+        }
+
+        .status-container i {
+            font-size: 18px;
+        }
+
+        .back-link {
+            display: block;
+            text-align: center;
+            margin-top: 20px;
+            color: rgba(255, 255, 255, 0.8);
+            text-decoration: none;
+            font-size: 13px;
+            transition: color 0.2s;
+        }
+
+        .back-link:hover {
+            color: white;
+        }
+
+        @media (max-width: 560px) {
+            body {
+                padding: 1rem;
+            }
+            .checkout-body {
+                padding: 24px;
+            }
+            .checkout-header {
+                padding: 24px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="checkout-container">
+        <div class="checkout-card">
+            <div class="checkout-header">
+                <div class="logo-icon">
+                    <i class="fas fa-chart-line"></i>
+                </div>
+                <h1>QuickView Pro</h1>
+                <p>Professional Amazon Research Tool</p>
+            </div>
+            
+            <div class="checkout-body">
+                <!-- Status messages -->
+                <div id="statusContainer" class="status-container">
+                    <i class="fas fa-info-circle"></i>
+                    <span id="statusMessage"></span>
+                </div>
+
+                <!-- Plan Summary -->
+                <div class="plan-summary">
+                    <div class="plan-name">🚀 Pro Seller Plan</div>
+                    <div class="plan-price">$14 <span>/month</span></div>
+                    <div class="trial-badge">✨ 7-day free trial included</div>
+                    <ul class="features-list">
+                        <li><i class="fas fa-check-circle"></i> 500 ASINs/day (Bulk checker)</li>
+                        <li><i class="fas fa-check-circle"></i> Unlimited research profiles + Categories</li>
+                        <li><i class="fas fa-check-circle"></i> Advanced profit analytics & ROI</li>
+                        <li><i class="fas fa-check-circle"></i> CSV export + Cloud sync</li>
+                        <li><i class="fas fa-check-circle"></i> Priority support</li>
+                    </ul>
+                </div>
+
+                <!-- Email Form -->
+                <div class="form-group">
+                    <label for="email">Email Address</label>
+                    <input type="email" id="email" placeholder="you@example.com" autocomplete="email">
+                    <div class="error-message" id="emailError">Please enter a valid email address</div>
+                </div>
+
+                <!-- Checkout Button -->
+                <button id="checkoutBtn" class="btn-checkout">
+                    <span>Start 7-Day Free Trial</span>
+                    <i class="fas fa-arrow-right"></i>
+                </button>
+
+                <div class="secure-badge">
+                    <i class="fas fa-lock"></i> Secure checkout powered by Paddle
+                    <br><small>No credit card required for trial</small>
+                </div>
+            </div>
+        </div>
+        <a href="https://amazonquickview.net" class="back-link">
+            <i class="fas fa-arrow-left"></i> Back to QuickView Pro
+        </a>
+    </div>
+
+    <script>
+        // Paddle Configuration
+        // REPLACE THESE WITH YOUR ACTUAL VALUES FROM PADDLE DASHBOARD
+        const PADDLE_ENVIRONMENT = 'sandbox'; // Change to 'production' for live
+        const PADDLE_CLIENT_TOKEN = 'YOUR_PADDLE_CLIENT_TOKEN'; // Get from Paddle Dashboard
+        const PRICE_ID = 'pri_xxxxxxxxxxxxx'; // Your Pro Seller price ID from Paddle
+        
+        // Your Cloudflare Worker URL for subscription verification
+        const WORKER_URL = 'https://paddleworker.studentinlifeonceandalways.workers.dev';
+        
+        let isProcessing = false;
+
+        // Initialize Paddle
+        function initPaddle() {
+            if (PADDLE_ENVIRONMENT === 'sandbox') {
+                Paddle.Environment.set('sandbox');
+            }
+            
+            Paddle.Initialize({
+                token: PADDLE_CLIENT_TOKEN,
+                eventCallback: function(event) {
+                    console.log('Paddle event:', event);
+                    
+                    if (event.name === 'checkout.closed') {
+                        // User closed the checkout modal
+                        showStatus('Checkout closed. You can try again anytime.', 'info');
+                        isProcessing = false;
+                        enableButton();
+                    }
+                    
+                    if (event.name === 'checkout.success') {
+                        // Payment successful
+                        showStatus('Payment successful! Redirecting to extension...', 'success');
+                        
+                        // Store user email for future reference
+                        const email = document.getElementById('email').value;
+                        if (email) {
+                            localStorage.setItem('quickview_user_email', email);
+                        }
+                        
+                        // Notify extension to refresh subscription
+                        notifyExtensionSuccess();
+                        
+                        // Redirect back to extension after 2 seconds
+                        setTimeout(() => {
+                            redirectToExtension();
+                        }, 2000);
+                    }
+                    
+                    if (event.name === 'checkout.error') {
+                        showStatus('Checkout error. Please try again.', 'error');
+                        isProcessing = false;
+                        enableButton();
+                    }
+                }
+            });
+        }
+
+        // Notify the Chrome extension about successful subscription
+        function notifyExtensionSuccess() {
+            // Send message to extension if possible
+            try {
+                chrome.runtime.sendMessage('YOUR_EXTENSION_ID', { 
+                    action: 'refreshSubscription',
+                    timestamp: Date.now()
+                });
+            } catch (e) {
+                console.log('Extension not available, will refresh on next open');
+            }
+        }
+
+        // Redirect back to the Chrome extension
+        function redirectToExtension() {
+            // Replace with your actual extension ID
+            const extensionId = 'YOUR_EXTENSION_ID';
+            const extensionUrl = `chrome-extension://${extensionId}/sidebar.html?checkout=success`;
+            
+            // Try to open extension
+            window.location.href = extensionUrl;
+            
+            // Fallback: redirect to website after 3 seconds if extension doesn't open
+            setTimeout(() => {
+                window.location.href = 'https://amazonquickview.net?subscription=success';
+            }, 3000);
+        }
+
+        function showStatus(message, type = 'info') {
+            const container = document.getElementById('statusContainer');
+            const messageSpan = document.getElementById('statusMessage');
+            
+            container.className = 'status-container';
+            if (type === 'error') {
+                container.classList.add('error');
+            } else if (type === 'success') {
+                container.classList.add('success');
+            }
+            
+            messageSpan.textContent = message;
+            container.style.display = 'flex';
+            
+            // Auto-hide info messages after 5 seconds
+            if (type === 'info') {
+                setTimeout(() => {
+                    container.style.display = 'none';
+                }, 5000);
+            }
+        }
+
+        function hideStatus() {
+            const container = document.getElementById('statusContainer');
+            container.style.display = 'none';
+        }
+
+        function disableButton() {
+            const btn = document.getElementById('checkoutBtn');
+            btn.disabled = true;
+            btn.innerHTML = '<div class="loader"></div> Processing...';
+        }
+
+        function enableButton() {
+            const btn = document.getElementById('checkoutBtn');
+            btn.disabled = false;
+            btn.innerHTML = '<span>Start 7-Day Free Trial</span> <i class="fas fa-arrow-right"></i>';
+        }
+
+        function validateEmail(email) {
+            const re = /^[^\s@]+@([^\s@]+\.)+[^\s@]+$/;
+            return re.test(email);
+        }
+
+        async function createCheckoutSession(email) {
+            try {
+                // Get or create user ID from localStorage
+                let userId = localStorage.getItem('quickview_user_id');
+                if (!userId) {
+                    userId = 'user_' + Date.now() + '_' + Math.random().toString(36).substr(2, 9);
+                    localStorage.setItem('quickview_user_id', userId);
+                }
+                
+                // Store email
+                localStorage.setItem('quickview_user_email', email);
+                
+                // Call your Cloudflare Worker to create checkout
+                const response = await fetch(`${WORKER_URL}/api/create-checkout`, {
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/json'
+                    },
+                    body: JSON.stringify({
+                        userId: userId,
+                        userEmail: email,
+                        returnUrl: 'https://amazonquickview.net/checkout-success.html'
+                    })
+                });
+                
+                const data = await response.json();
+                
+                if (data.success && data.checkoutUrl) {
+                    // Open Paddle checkout in new tab
+                    window.open(data.checkoutUrl, '_blank');
+                    showStatus('Checkout opened in new tab. Complete your subscription there.', 'success');
+                    isProcessing = false;
+                    enableButton();
+                } else {
+                    throw new Error(data.error || 'Failed to create checkout');
+                }
+                
+            } catch (error) {
+                console.error('Checkout error:', error);
+                showStatus('Failed to create checkout. Please try again.', 'error');
+                isProcessing = false;
+                enableButton();
+            }
+        }
+
+        // Check if returning from successful checkout
+        function checkReturnStatus() {
+            const urlParams = new URLSearchParams(window.location.search);
+            const checkoutSuccess = urlParams.get('checkout');
+            const subscriptionSuccess = urlParams.get('subscription');
+            
+            if (checkoutSuccess === 'success' || subscriptionSuccess === 'success') {
+                showStatus(
+                    '🎉 Subscription activated! Your extension will now have premium features.', 
+                    'success'
+                );
+                
+                // Clean URL
+                window.history.replaceState({}, document.title, window.location.pathname);
+            }
+        }
+
+        // Main checkout handler
+        async function handleCheckout() {
+            if (isProcessing) return;
+            
+            const emailInput = document.getElementById('email');
+            const email = emailInput.value.trim();
+            const emailError = document.getElementById('emailError');
+            
+            // Validate email
+            if (!email) {
+                emailError.style.display = 'block';
+                emailInput.classList.add('error');
+                emailInput.focus();
+                return;
+            }
+            
+            if (!validateEmail(email)) {
+                emailError.style.display = 'block';
+                emailInput.classList.add('error');
+                emailInput.focus();
+                return;
+            }
+            
+            emailError.style.display = 'none';
+            emailInput.classList.remove('error');
+            
+            isProcessing = true;
+            disableButton();
+            hideStatus();
+            showStatus('Creating secure checkout session...', 'info');
+            
+            await createCheckoutSession(email);
+        }
+
+        // Auto-fill email from localStorage
+        function loadSavedEmail() {
+            const savedEmail = localStorage.getItem('quickview_user_email');
+            if (savedEmail) {
+                document.getElementById('email').value = savedEmail;
+            }
+        }
+
+        // Initialize on page load
+        document.addEventListener('DOMContentLoaded', () => {
+            // Check Paddle configuration
+            if (PADDLE_CLIENT_TOKEN === 'YOUR_PADDLE_CLIENT_TOKEN') {
+                console.warn('⚠️ Please configure your Paddle Client Token in checkout.html');
+                showStatus('Checkout configuration incomplete. Please contact support.', 'error');
+            } else {
+                initPaddle();
+            }
+            
+            loadSavedEmail();
+            checkReturnStatus();
+            
+            // Add event listeners
+            const checkoutBtn = document.getElementById('checkoutBtn');
+            checkoutBtn.addEventListener('click', handleCheckout);
+            
+            // Enter key submits
+            const emailInput = document.getElementById('email');
+            emailInput.addEventListener('keypress', (e) => {
+                if (e.key === 'Enter') {
+                    handleCheckout();
+                }
+            });
+        });
+    </script>
+</body>
+</html>
