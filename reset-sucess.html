@@ -1,0 +1,157 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <title>Password Reset Success - Amazon Quick View Pro</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            min-height: 100vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            padding: 20px;
+            animation: fadeIn 0.5s ease-out;
+        }
+        
+        @keyframes fadeIn {
+            from { opacity: 0; }
+            to { opacity: 1; }
+        }
+        
+        @keyframes checkmark {
+            0% { transform: scale(0); opacity: 0; }
+            50% { transform: scale(1.2); }
+            100% { transform: scale(1); opacity: 1; }
+        }
+        
+        @keyframes slideUp {
+            from { transform: translateY(30px); opacity: 0; }
+            to { transform: translateY(0); opacity: 1; }
+        }
+        
+        .container {
+            background: white;
+            border-radius: 32px;
+            padding: 48px 32px;
+            width: 100%;
+            max-width: 420px;
+            text-align: center;
+            box-shadow: 0 25px 50px rgba(0,0,0,0.3);
+            animation: slideUp 0.5s ease-out 0.2s both;
+        }
+        
+        .success-icon {
+            width: 80px;
+            height: 80px;
+            background: linear-gradient(135deg, #10b981, #059669);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin: 0 auto 24px;
+            animation: checkmark 0.5s ease-out 0.1s both;
+        }
+        
+        .success-icon svg {
+            width: 48px;
+            height: 48px;
+            stroke: white;
+            stroke-width: 2;
+        }
+        
+        h1 {
+            font-size: 26px;
+            color: #1e293b;
+            margin-bottom: 12px;
+            font-weight: 700;
+        }
+        
+        .message {
+            color: #475569;
+            font-size: 15px;
+            line-height: 1.5;
+            margin-bottom: 32px;
+        }
+        
+        .redirect-timer {
+            font-size: 13px;
+            color: #94a3b8;
+            margin-top: 24px;
+            padding-top: 24px;
+            border-top: 1px solid #eef2f6;
+        }
+        
+        .dots {
+            display: inline-block;
+            width: 24px;
+            text-align: left;
+        }
+        
+        @keyframes blink {
+            0%, 20% { opacity: 0; }
+            50% { opacity: 1; }
+            100% { opacity: 0; }
+        }
+        
+        .dot {
+            animation: blink 1.4s infinite;
+            animation-fill-mode: both;
+        }
+        
+        .dot:nth-child(2) { animation-delay: 0.2s; }
+        .dot:nth-child(3) { animation-delay: 0.4s; }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="success-icon">
+            <svg viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                <path d="M20 6L9 17L4 12" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"/>
+            </svg>
+        </div>
+        
+        <h1>Password Reset Success!</h1>
+        
+        <div class="message">
+            Your password has been updated successfully.<br>
+            You can now sign in with your new password.
+        </div>
+        
+        <div class="redirect-timer">
+            Closing in <span id="timer">5</span> seconds<span class="dots"><span class="dot">.</span><span class="dot">.</span><span class="dot">.</span></span>
+        </div>
+    </div>
+
+    <script>
+        // Auto-close the tab/window after 5 seconds
+        let secondsLeft = 5;
+        const timerElement = document.getElementById('timer');
+        
+        const countdown = setInterval(() => {
+            secondsLeft--;
+            if (timerElement) {
+                timerElement.textContent = secondsLeft;
+            }
+            
+            if (secondsLeft <= 0) {
+                clearInterval(countdown);
+                window.close();
+            }
+        }, 1000);
+        
+        // Also close after 5 seconds (fallback)
+        setTimeout(() => {
+            window.close();
+        }, 5000);
+    </script>
+</body>
+</html>
