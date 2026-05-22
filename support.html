@@ -1,0 +1,1087 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Support - Amazon Quick View Pro</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, 'Helvetica Neue', Arial, sans-serif;
+            background: linear-gradient(135deg, #f5f7fa 0%, #e9eef5 100%);
+            min-height: 100vh;
+            padding: 40px 20px;
+        }
+
+        .container {
+            max-width: 1000px;
+            margin: 0 auto;
+            background: #ffffff;
+            border-radius: 24px;
+            box-shadow: 0 20px 40px rgba(0, 0, 0, 0.08);
+            overflow: hidden;
+        }
+
+        .header {
+            background: linear-gradient(135deg, #1e293b, #0f172a);
+            padding: 40px 32px;
+            text-align: center;
+        }
+
+        .logo-icon {
+            width: 64px;
+            height: 64px;
+            background: linear-gradient(135deg, #ff9900, #ffb347);
+            border-radius: 20px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin: 0 auto 16px;
+            box-shadow: 0 8px 20px rgba(255, 153, 0, 0.25);
+        }
+
+        .logo-icon svg {
+            width: 32px;
+            height: 32px;
+        }
+
+        .header h1 {
+            color: #ffffff;
+            font-size: 28px;
+            font-weight: 700;
+            margin-bottom: 8px;
+        }
+
+        .header p {
+            color: #94a3b8;
+            font-size: 14px;
+        }
+
+        .search-bar {
+            background: #f8fafc;
+            padding: 20px 24px;
+            border-bottom: 1px solid #eef2f6;
+        }
+
+        .search-container {
+            position: relative;
+            max-width: 500px;
+            margin: 0 auto;
+        }
+
+        .search-container input {
+            width: 100%;
+            padding: 14px 20px 14px 48px;
+            border: 1px solid #e2e8f0;
+            border-radius: 50px;
+            font-size: 14px;
+            background: white;
+            transition: all 0.2s ease;
+        }
+
+        .search-container input:focus {
+            outline: none;
+            border-color: #ff9900;
+            box-shadow: 0 0 0 3px rgba(255, 153, 0, 0.1);
+        }
+
+        .search-container::before {
+            content: "🔍";
+            position: absolute;
+            left: 18px;
+            top: 50%;
+            transform: translateY(-50%);
+            font-size: 16px;
+            pointer-events: none;
+        }
+
+        .content {
+            padding: 32px;
+        }
+
+        .quick-links {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 12px;
+            margin-bottom: 32px;
+            padding-bottom: 24px;
+            border-bottom: 1px solid #eef2f6;
+        }
+
+        .quick-link {
+            background: #f8fafc;
+            border: 1px solid #e2e8f0;
+            border-radius: 40px;
+            padding: 8px 20px;
+            font-size: 13px;
+            font-weight: 500;
+            color: #475569;
+            cursor: pointer;
+            transition: all 0.2s ease;
+            text-decoration: none;
+            display: inline-block;
+        }
+
+        .quick-link:hover {
+            background: #ff9900;
+            border-color: #ff9900;
+            color: white;
+        }
+
+        .faq-section {
+            margin-bottom: 48px;
+        }
+
+        .faq-section h2 {
+            font-size: 22px;
+            font-weight: 700;
+            color: #1e293b;
+            margin-bottom: 24px;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .faq-item {
+            border: 1px solid #eef2f6;
+            border-radius: 16px;
+            margin-bottom: 12px;
+            overflow: hidden;
+            transition: all 0.2s ease;
+        }
+
+        .faq-item:hover {
+            border-color: #cbd5e1;
+        }
+
+        .faq-question {
+            padding: 18px 20px;
+            background: #ffffff;
+            cursor: pointer;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            font-weight: 600;
+            color: #1e293b;
+            font-size: 15px;
+            transition: background 0.2s;
+        }
+
+        .faq-question:hover {
+            background: #f8fafc;
+        }
+
+        .faq-question .icon {
+            font-size: 18px;
+            color: #94a3b8;
+            transition: transform 0.2s;
+        }
+
+        .faq-item.active .faq-question .icon {
+            transform: rotate(180deg);
+            color: #ff9900;
+        }
+
+        .faq-answer {
+            padding: 0 20px;
+            max-height: 0;
+            overflow: hidden;
+            transition: all 0.3s ease;
+            background: #fafcff;
+            border-top: 1px solid transparent;
+        }
+
+        .faq-item.active .faq-answer {
+            padding: 20px;
+            max-height: 800px;
+            border-top-color: #eef2f6;
+        }
+
+        .faq-answer p {
+            margin-bottom: 12px;
+            line-height: 1.6;
+            color: #475569;
+            font-size: 14px;
+        }
+
+        .faq-answer ul, .faq-answer ol {
+            margin: 12px 0 12px 24px;
+        }
+
+        .faq-answer li {
+            margin-bottom: 6px;
+            color: #475569;
+            font-size: 14px;
+        }
+
+        .faq-answer code {
+            background: #f1f5f9;
+            padding: 2px 6px;
+            border-radius: 6px;
+            font-size: 13px;
+            font-family: monospace;
+            color: #c45500;
+        }
+
+        .note {
+            background: #e0f2fe;
+            padding: 12px;
+            border-radius: 10px;
+            margin: 12px 0;
+            font-size: 13px;
+            color: #0369a1;
+        }
+
+        .warning {
+            background: #fef3c7;
+            padding: 12px;
+            border-radius: 10px;
+            margin: 12px 0;
+            font-size: 13px;
+            color: #92400e;
+        }
+
+        .success {
+            background: #dcfce7;
+            padding: 12px;
+            border-radius: 10px;
+            margin: 12px 0;
+            font-size: 13px;
+            color: #166534;
+        }
+
+        .troubleshoot-steps {
+            background: #f8fafc;
+            border-radius: 16px;
+            padding: 24px;
+            margin: 24px 0;
+        }
+
+        .troubleshoot-steps h3 {
+            font-size: 18px;
+            font-weight: 600;
+            color: #1e293b;
+            margin-bottom: 16px;
+        }
+
+        .step {
+            display: flex;
+            align-items: flex-start;
+            gap: 12px;
+            margin-bottom: 16px;
+            padding: 12px;
+            background: white;
+            border-radius: 12px;
+        }
+
+        .step-number {
+            width: 28px;
+            height: 28px;
+            background: #ff9900;
+            color: white;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-weight: 700;
+            font-size: 14px;
+            flex-shrink: 0;
+        }
+
+        .step-content {
+            flex: 1;
+        }
+
+        .step-content strong {
+            color: #1e293b;
+            display: block;
+            margin-bottom: 4px;
+        }
+
+        .step-content p {
+            color: #64748b;
+            font-size: 13px;
+            margin: 0;
+        }
+
+        .status-banner {
+            background: #f0fdf4;
+            border-left: 4px solid #10b981;
+            padding: 16px 20px;
+            border-radius: 12px;
+            margin-bottom: 24px;
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            flex-wrap: wrap;
+            justify-content: space-between;
+        }
+
+        .status-banner .status-text {
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+
+        .status-banner .status-dot {
+            width: 10px;
+            height: 10px;
+            background: #10b981;
+            border-radius: 50%;
+            animation: pulse 2s infinite;
+        }
+
+        @keyframes pulse {
+            0% { opacity: 1; transform: scale(1); }
+            50% { opacity: 0.5; transform: scale(1.2); }
+            100% { opacity: 1; transform: scale(1); }
+        }
+
+        /* Email Card - Simple Report Issue */
+        .email-card {
+            background: linear-gradient(135deg, #fef3c7, #fde68a);
+            border-radius: 20px;
+            padding: 32px;
+            margin: 32px 0;
+            text-align: center;
+            border: 1px solid #f59e0b;
+        }
+
+        .email-card h3 {
+            font-size: 24px;
+            font-weight: 700;
+            color: #92400e;
+            margin-bottom: 12px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 12px;
+        }
+
+        .email-card p {
+            color: #78350f;
+            font-size: 14px;
+            margin-bottom: 20px;
+        }
+
+        .email-address {
+            display: inline-flex;
+            align-items: center;
+            gap: 12px;
+            background: white;
+            padding: 12px 24px;
+            border-radius: 60px;
+            font-size: 18px;
+            font-weight: 600;
+            color: #1e293b;
+            border: 1px solid #f59e0b;
+            cursor: pointer;
+            transition: all 0.2s ease;
+            margin-bottom: 16px;
+        }
+
+        .email-address:hover {
+            background: #fffbeb;
+            transform: scale(1.02);
+            box-shadow: 0 4px 12px rgba(245, 158, 11, 0.3);
+        }
+
+        .email-address .copy-icon {
+            font-size: 18px;
+            color: #f59e0b;
+        }
+
+        .toast-message {
+            position: fixed;
+            bottom: 30px;
+            left: 50%;
+            transform: translateX(-50%);
+            background: #1e293b;
+            color: white;
+            padding: 10px 20px;
+            border-radius: 40px;
+            font-size: 13px;
+            z-index: 1000;
+            animation: fadeInOut 2s ease;
+        }
+
+        @keyframes fadeInOut {
+            0% { opacity: 0; transform: translateX(-50%) translateY(20px); }
+            15% { opacity: 1; transform: translateX(-50%) translateY(0); }
+            85% { opacity: 1; transform: translateX(-50%) translateY(0); }
+            100% { opacity: 0; transform: translateX(-50%) translateY(20px); }
+        }
+
+        .contact-cards {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+            gap: 20px;
+            margin: 32px 0;
+        }
+
+        .contact-card {
+            background: #f8fafc;
+            border-radius: 16px;
+            padding: 20px;
+            text-align: center;
+            transition: all 0.2s ease;
+            border: 1px solid #eef2f6;
+        }
+
+        .contact-card:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 8px 20px rgba(0, 0, 0, 0.08);
+            border-color: #ff9900;
+        }
+
+        .contact-icon {
+            font-size: 32px;
+            margin-bottom: 12px;
+        }
+
+        .contact-card h3 {
+            font-size: 16px;
+            font-weight: 600;
+            color: #1e293b;
+            margin-bottom: 6px;
+        }
+
+        .contact-card p {
+            font-size: 12px;
+            color: #64748b;
+            margin-bottom: 12px;
+        }
+
+        .contact-card a {
+            color: #ff9900;
+            text-decoration: none;
+            font-weight: 600;
+            font-size: 13px;
+        }
+
+        .contact-card a:hover {
+            text-decoration: underline;
+        }
+
+        .footer {
+            background: #f8fafc;
+            padding: 20px 32px;
+            text-align: center;
+            border-top: 1px solid #eef2f6;
+            font-size: 12px;
+            color: #94a3b8;
+        }
+
+        .footer a {
+            color: #ff9900;
+            text-decoration: none;
+        }
+
+        .footer a:hover {
+            text-decoration: underline;
+        }
+
+        .footer-links {
+            display: flex;
+            justify-content: center;
+            gap: 24px;
+            margin-top: 12px;
+            flex-wrap: wrap;
+        }
+
+        @media (max-width: 600px) {
+            .content {
+                padding: 20px;
+            }
+            .header h1 {
+                font-size: 22px;
+            }
+            .faq-question {
+                font-size: 13px;
+                padding: 14px 16px;
+            }
+            .quick-links {
+                justify-content: center;
+            }
+            .email-address {
+                font-size: 14px;
+                padding: 10px 18px;
+            }
+        }
+
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(10px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        .container {
+            animation: fadeIn 0.3s ease-out;
+        }
+
+        .highlight {
+            background: #fef3c7;
+            padding: 0 2px;
+            border-radius: 4px;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="header">
+            <div class="logo-icon">
+                <svg width="32" height="32" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                    <path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm0 4c1.1 0 2 .9 2 2s-.9 2-2 2-2-.9-2-2 .9-2 2-2zm0 13c-2.33 0-4.31-1.46-5.11-3.5h10.22c-.8 2.04-2.78 3.5-5.11 3.5z" fill="white"/>
+                </svg>
+            </div>
+            <h1>Support Center</h1>
+            <p>Get help with Amazon Quick View Pro</p>
+        </div>
+
+        <div class="search-bar">
+            <div class="search-container">
+                <input type="text" id="searchInput" placeholder="Search FAQs... (e.g., 'BSR not showing', 'profit calculation', 'bookmark')">
+            </div>
+        </div>
+
+        <div class="content">
+            <div class="status-banner">
+                <div class="status-text">
+                    <span class="status-dot"></span>
+                    <span><strong>All systems operational</strong> — Extension is working normally</span>
+                </div>
+            </div>
+
+            <div class="quick-links">
+                <a href="#getting-started" class="quick-link" data-category="getting-started">🚀 Getting Started</a>
+                <a href="#features" class="quick-link" data-category="features">⚙️ Features</a>
+                <a href="#troubleshooting" class="quick-link" data-category="troubleshooting">🔧 Troubleshooting</a>
+                <a href="#account" class="quick-link" data-category="account">🔐 Account & Sync</a>
+                <a href="#billing" class="quick-link" data-category="billing">💰 Pricing</a>
+                <a href="#report-issue" class="quick-link" data-category="report">🐛 Report Issue</a>
+            </div>
+
+            <!-- Report Issue Email Card -->
+            <div id="report-issue" class="email-card">
+                <h3>
+                    <span>🐛</span>
+                    Report an Issue
+                    <span>📧</span>
+                </h3>
+                <p>Found a bug or need help? Send us an email and we'll get back to you within 24-48 hours.</p>
+                
+                <div class="email-address" id="supportEmail" onclick="copyEmail()">
+                    <span>support@amazonquickview.net</span>
+                    <span class="copy-icon">📋</span>
+                </div>
+                
+                <p style="font-size: 12px; margin-top: 8px;">Click the email to copy it, or click the button below to open your email client.</p>
+                
+                <a href="mailto:support@amazonquickview.net" style="display: inline-block; background: #ff9900; color: white; padding: 10px 24px; border-radius: 40px; text-decoration: none; font-weight: 600; margin-top: 8px;">
+                    ✉️ Open Email Client
+                </a>
+                
+                <div class="note" style="margin-top: 20px; background: #fffbeb; text-align: left;">
+                    <strong>📋 When emailing us, please include:</strong><br>
+                    • Extension version (found in Settings)<br>
+                    • Chrome version (chrome://settings/help)<br>
+                    • Steps to reproduce the issue<br>
+                    • Screenshots if possible<br>
+                    • Your Amazon marketplace (.com, .co.uk, etc.)
+                </div>
+            </div>
+
+            <!-- FAQ Sections -->
+            <div id="getting-started" class="faq-section">
+                <h2>🚀 Getting Started</h2>
+                
+                <div class="faq-item">
+                    <div class="faq-question">
+                        How do I install Amazon Quick View Pro?
+                        <span class="icon">▼</span>
+                    </div>
+                    <div class="faq-answer">
+                        <p>Follow these steps to install the extension:</p>
+                        <ol>
+                            <li>Go to the Chrome Web Store</li>
+                            <li>Search for "Amazon Quick View Pro"</li>
+                            <li>Click "Add to Chrome"</li>
+                            <li>Confirm the installation by clicking "Add Extension"</li>
+                            <li>You'll see the extension icon appear in your browser toolbar</li>
+                        </ol>
+                        <div class="note">💡 <strong>Tip:</strong> Pin the extension to your toolbar for easy access by clicking the puzzle piece icon and then the pin icon next to Amazon Quick View Pro.</div>
+                    </div>
+                </div>
+
+                <div class="faq-item">
+                    <div class="faq-question">
+                        Do I need to create an account to use the extension?
+                        <span class="icon">▼</span>
+                    </div>
+                    <div class="faq-answer">
+                        <p><strong>No, an account is completely optional!</strong></p>
+                        <p>You can use all core features without an account:</p>
+                        <ul>
+                            <li>✅ View product badges (profit, BSR, seller info)</li>
+                            <li>✅ Bookmark products locally</li>
+                            <li>✅ Create research profiles</li>
+                            <li>✅ Export data as CSV</li>
+                        </ul>
+                        <p>An account is only needed if you want to:</p>
+                        <ul>
+                            <li>☁️ Sync your data across multiple devices</li>
+                            <li>💾 Back up your research to the cloud</li>
+                            <li>🔄 Access your bookmarks after reinstalling Chrome</li>
+                        </ul>
+                    </div>
+                </div>
+
+                <div class="faq-item">
+                    <div class="faq-question">
+                        How do I create my first research profile?
+                        <span class="icon">▼</span>
+                    </div>
+                    <div class="faq-answer">
+                        <p>Creating a profile is easy:</p>
+                        <ol>
+                            <li>Click the extension icon to open the side panel</li>
+                            <li>Go to the <strong>Profiles</strong> tab</li>
+                            <li>Click <strong>+ New Product Profile</strong></li>
+                            <li>Enter a name (e.g., "Electronics Q4")</li>
+                            <li>Select your Amazon marketplace domain</li>
+                            <li>Enter your cost settings (product cost, shipping, etc.)</li>
+                            <li>Click <strong>Save Profile</strong></li>
+                        </ol>
+                        <div class="success">✅ Once saved, set it as your active profile to start seeing profit calculations on Amazon!</div>
+                    </div>
+                </div>
+            </div>
+
+            <div id="features" class="faq-section">
+                <h2>⚙️ Features</h2>
+
+                <div class="faq-item">
+                    <div class="faq-question">
+                        How is profit calculated?
+                        <span class="icon">▼</span>
+                    </div>
+                    <div class="faq-answer">
+                        <p>The extension calculates profit using this formula:</p>
+                        <div class="note">
+                            <strong>Revenue</strong> = Price × Quantity<br>
+                            <strong>Fees</strong> = (Referral Fee × Quantity) + (FBA Fee × Quantity) + Storage Fee + Additional Costs<br>
+                            <strong>Costs</strong> = (Product Cost × Quantity) + (Shipping × Quantity) + (Ads × Quantity) + (Revenue × Return Rate %)<br>
+                            <strong>Net Profit</strong> = Revenue - Fees - Costs<br>
+                            <strong>Margin</strong> = (Net Profit / Revenue) × 100%<br>
+                            <strong>ROI</strong> = (Net Profit / Total Costs) × 100%
+                        </div>
+                        <p>All numbers are estimates. You should verify calculations independently before making business decisions.</p>
+                    </div>
+                </div>
+
+                <div class="faq-item">
+                    <div class="faq-question">
+                        What is BSR and how do you extract it?
+                        <span class="icon">▼</span>
+                    </div>
+                    <div class="faq-answer">
+                        <p><strong>BSR (Best Sellers Rank)</strong> is Amazon's ranking of how well a product is selling in its category. Lower numbers = better sales.</p>
+                        <p>The extension extracts BSR using multiple methods to ensure accuracy across all 22+ Amazon marketplaces:</p>
+                        <ul>
+                            <li>📊 Best Sellers Rank section in product details</li>
+                            <li>📋 Product Details table</li>
+                            <li>📦 Nested BSR list (detailBulletsWrapper_feature_div)</li>
+                            <li>🔗 JSON-LD structured data (most reliable)</li>
+                            <li>🌍 Language-agnostic patterns for non-English domains</li>
+                        </ul>
+                        <div class="note">💡 <strong>Note:</strong> BSR may not be available for all products, especially new listings or those with no sales history.</div>
+                    </div>
+                </div>
+
+                <div class="faq-item">
+                    <div class="faq-question">
+                        How do I bookmark a product?
+                        <span class="icon">▼</span>
+                    </div>
+                    <div class="faq-answer">
+                        <p>Bookmarking products is simple:</p>
+                        <ol>
+                            <li>Navigate to any Amazon product page or search result</li>
+                            <li>Look for the <strong>★ Bookmark</strong> button in the extension badge</li>
+                            <li>Click the button</li>
+                            <li>Select which profile to save the product to</li>
+                            <li>The product will appear in your side panel under that profile</li>
+                        </ol>
+                        <div class="success">✅ Bookmarked products save all data: ASIN, title, price, rating, BSR, seller info, and profit calculations!</div>
+                    </div>
+                </div>
+
+                <div class="faq-item">
+                    <div class="faq-question">
+                        What are Additional Costs and how do I use them?
+                        <span class="icon">▼</span>
+                    </div>
+                    <div class="faq-answer">
+                        <p><strong>Additional Costs</strong> allow you to add unlimited custom fees to your profit calculations:</p>
+                        <ul>
+                            <li><strong>Fixed amount</strong> - e.g., $1.80 media closing fee, $0.55 prep fee</li>
+                            <li><strong>Percentage</strong> - e.g., 2% currency conversion fee, 20% VAT</li>
+                        </ul>
+                        <p>To add an Additional Cost:</p>
+                        <ol>
+                            <li>Open the profile modal (Edit Profile or Create New Profile)</li>
+                            <li>Scroll to the <strong>Additional Costs</strong> section</li>
+                            <li>Click the <strong>+</strong> button</li>
+                            <li>Enter a name (e.g., "Media Closing Fee")</li>
+                            <li>Enter the amount and select Fixed or Percentage</li>
+                            <li>Click Add Cost</li>
+                        </ol>
+                        <div class="note">💡 Fixed costs multiply by Quantity. Percentage costs apply to total revenue.</div>
+                    </div>
+                </div>
+            </div>
+
+            <div id="troubleshooting" class="faq-section">
+                <h2>🔧 Troubleshooting</h2>
+
+                <div class="troubleshoot-steps">
+                    <h3>Common Issues & Solutions</h3>
+                    
+                    <div class="step">
+                        <div class="step-number">1</div>
+                        <div class="step-content">
+                            <strong>Badges not showing on Amazon</strong>
+                            <p>Refresh the Amazon page. If still not showing, click the extension icon to open the side panel and ensure you're signed in. The extension only works on Amazon product pages and search results.</p>
+                        </div>
+                    </div>
+
+                    <div class="step">
+                        <div class="step-number">2</div>
+                        <div class="step-content">
+                            <strong>BSR not showing or "Not available"</strong>
+                            <p>Some products (especially new listings) may not have BSR data yet. The extension tries multiple extraction methods - if still not showing, Amazon may not have assigned a BSR to this product.</p>
+                        </div>
+                    </div>
+
+                    <div class="step">
+                        <div class="step-number">3</div>
+                        <div class="step-content">
+                            <strong>Profit calculations seem wrong</strong>
+                            <p>Check your profile settings: product cost, shipping, FBA fee, referral fee, and quantity. Make sure you've selected the correct Amazon domain for your marketplace. Also verify that any Additional Costs are correctly configured.</p>
+                        </div>
+                    </div>
+
+                    <div class="step">
+                        <div class="step-number">4</div>
+                        <div class="step-content">
+                            <strong>Extension stopped working after Chrome update</strong>
+                            <p>Try these steps:</p>
+                            <ol style="margin-top: 6px; margin-left: 20px;">
+                                <li>Go to chrome://extensions/</li>
+                                <li>Toggle the extension off, then on again</li>
+                                <li>If that doesn't work, click "Remove" and reinstall from Chrome Web Store</li>
+                            </ol>
+                        </div>
+                    </div>
+
+                    <div class="step">
+                        <div class="step-number">5</div>
+                        <div class="step-content">
+                            <strong>Cloud sync not working</strong>
+                            <p>Make sure you're signed in. Check your internet connection. Try signing out and back in. You can also force a sync by opening the side panel and clicking the refresh button on any profile.</p>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="faq-item">
+                    <div class="faq-question">
+                        How do I clear the BSR cache?
+                        <span class="icon">▼</span>
+                    </div>
+                    <div class="faq-answer">
+                        <p>To clear the BSR cache:</p>
+                        <ol>
+                            <li>Open the extension side panel</li>
+                            <li>Click the <strong>Settings</strong> button (⚙️) at the bottom</li>
+                            <li>In the Settings page, scroll to <strong>Data Management</strong></li>
+                            <li>Click <strong>Clear BSR Cache</strong></li>
+                        </ol>
+                        <p>This forces the extension to fetch fresh BSR data for all products on your next Amazon visit.</p>
+                    </div>
+                </div>
+
+                <div class="faq-item">
+                    <div class="faq-question">
+                        The Bulk ASIN Checker shows "CAPTCHA detected" - what do I do?
+                        <span class="icon">▼</span>
+                    </div>
+                    <div class="faq-answer">
+                        <p>Amazon sometimes triggers CAPTCHA challenges when receiving many requests. Here's what to do:</p>
+                        <ol>
+                            <li>Open an Amazon tab in your browser</li>
+                            <li>Complete any CAPTCHA challenges you see</li>
+                            <li>Return to the extension's Bulk ASIN tab</li>
+                            <li>Click the <strong>Resume</strong> button</li>
+                        </ol>
+                        <div class="warning">⚠️ If CAPTCHAs appear frequently, reduce the number of ASINs per batch or increase the delay between requests.</div>
+                    </div>
+                </div>
+            </div>
+
+            <div id="account" class="faq-section">
+                <h2>🔐 Account & Sync</h2>
+
+                <div class="faq-item">
+                    <div class="faq-question">
+                        How do I reset my password?
+                        <span class="icon">▼</span>
+                    </div>
+                    <div class="faq-answer">
+                        <p>To reset your password:</p>
+                        <ol>
+                            <li>Go to the extension's side panel</li>
+                            <li>Click <strong>Sign Out</strong> (or go to login page)</li>
+                            <li>Click <strong>Forgot password?</strong> on the login screen</li>
+                            <li>Enter your email address</li>
+                            <li>Check your email for a password reset link</li>
+                            <li>Click the link and create a new password</li>
+                        </ol>
+                        <div class="note">💡 The reset link expires after 24 hours. If you don't see the email, check your spam folder.</div>
+                    </div>
+                </div>
+
+                <div class="faq-item">
+                    <div class="faq-question">
+                        Can I use the extension on multiple devices?
+                        <span class="icon">▼</span>
+                    </div>
+                    <div class="faq-answer">
+                        <p><strong>Yes!</strong> If you create an account and sign in, your data syncs across all devices where you use the extension:</p>
+                        <ul>
+                            <li>💻 Multiple computers with the same Chrome profile</li>
+                            <li>🖥️ Different Chrome profiles (sign in with same account)</li>
+                            <li>📱 Chrome on different operating systems (Windows, Mac, Linux)</li>
+                        </ul>
+                        <p>Simply install the extension on each device and sign in with the same email and password. Your profiles, bookmarks, and categories will sync automatically.</p>
+                    </div>
+                </div>
+
+                <div class="faq-item">
+                    <div class="faq-question">
+                        How do I delete my account and data?
+                        <span class="icon">▼</span>
+                    </div>
+                    <div class="faq-answer">
+                        <p>To permanently delete your account and all cloud data:</p>
+                        <ol>
+                            <li>Sign in to the extension</li>
+                            <li>Open the side panel</li>
+                            <li>Click the <strong>Settings</strong> button (⚙️)</li>
+                            <li>Scroll to the <strong>Account</strong> section</li>
+                            <li>Click <strong>Sign Out</strong> (this does not delete your data)</li>
+                        </ol>
+                        <p><strong>To request full account deletion:</strong> Email <a href="mailto:privacy@amazonquickview.net">privacy@amazonquickview.net</a> from your registered email address with "Delete My Account" in the subject line. We will process deletion within 7 days.</p>
+                        <div class="warning">⚠️ Account deletion is permanent. Your cloud data cannot be recovered after deletion.</div>
+                    </div>
+                </div>
+            </div>
+
+            <div id="billing" class="faq-section">
+                <h2>💰 Pricing</h2>
+
+                <div class="faq-item">
+                    <div class="faq-question">
+                        Is Amazon Quick View Pro free?
+                        <span class="icon">▼</span>
+                    </div>
+                    <div class="faq-answer">
+                        <div class="success">
+                            <strong>✅ Yes, the extension is completely free to use!</strong>
+                        </div>
+                        <p>All core features are free with no hidden costs:</p>
+                        <ul>
+                            <li>✅ Product badges (profit, BSR, seller info)</li>
+                            <li>✅ Bookmarking products</li>
+                            <li>✅ Unlimited research profiles</li>
+                            <li>✅ Categories and organization</li>
+                            <li>✅ Bulk ASIN checker (500 ASINs per day)</li>
+                            <li>✅ Cloud sync (optional account)</li>
+                            <li>✅ CSV exports</li>
+                        </ul>
+                        <p>There are no premium tiers, subscriptions, or paywalls. If we ever introduce paid features in the future, existing free features will remain free.</p>
+                    </div>
+                </div>
+
+                <div class="faq-item">
+                    <div class="faq-question">
+                        Are there any usage limits?
+                        <span class="icon">▼</span>
+                    </div>
+                    <div class="faq-answer">
+                        <p>The only limit is on the Bulk ASIN Checker:</p>
+                        <ul>
+                            <li><strong>500 ASINs per day</strong> - This prevents excessive requests to Amazon that could trigger rate limiting or CAPTCHAs</li>
+                        </ul>
+                        <p>All other features have no limits:</p>
+                        <ul>
+                            <li>📌 Unlimited bookmarked products</li>
+                            <li>📁 Unlimited research profiles</li>
+                            <li>🏷️ Unlimited categories</li>
+                            <li>🔄 Unlimited cloud sync (with account)</li>
+                        </ul>
+                        <p>The daily limit resets at midnight UTC each day.</p>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Contact Cards (Alternative contact methods) -->
+            <h2 style="margin: 32px 0 16px 0;">📬 Other Ways to Reach Us</h2>
+            
+            <div class="contact-cards">
+                <div class="contact-card">
+                    <div class="contact-icon">🔒</div>
+                    <h3>Privacy & Legal</h3>
+                    <p>Privacy concerns or data deletion requests</p>
+                    <a href="mailto:privacy@amazonquickview.net">privacy@amazonquickview.net</a>
+                </div>
+                <div class="contact-card">
+                    <div class="contact-icon">💡</div>
+                    <h3>Feature Requests</h3>
+                    <p>Suggest new features or improvements</p>
+                    <a href="mailto:feedback@amazonquickview.net">feedback@amazonquickview.net</a>
+                </div>
+            </div>
+
+            <div class="note" style="text-align: center; margin: 24px 0; padding: 16px;">
+                <strong>📋 Response Time:</strong> We typically respond to all inquiries within 24-48 hours (business days).
+            </div>
+        </div>
+
+        <div class="footer">
+            <p>Amazon Quick View Pro - Professional Product Research Tool</p>
+            <div class="footer-links">
+                <a href="privacy.html">Privacy Policy</a>
+                <a href="terms.html">Terms of Service</a>
+                <a href="support.html">Support</a>
+            </div>
+            <p style="margin-top: 12px;">© 2026 Amazon Quick View Pro. All rights reserved.</p>
+            <p style="margin-top: 4px; font-size: 10px;">Not affiliated with Amazon.com, Inc.</p>
+        </div>
+    </div>
+
+    <script>
+        // Accordion functionality
+        document.querySelectorAll('.faq-question').forEach(question => {
+            question.addEventListener('click', () => {
+                const item = question.parentElement;
+                item.classList.toggle('active');
+            });
+        });
+
+        // Search functionality
+        const searchInput = document.getElementById('searchInput');
+        if (searchInput) {
+            searchInput.addEventListener('input', (e) => {
+                const searchTerm = e.target.value.toLowerCase().trim();
+                const faqItems = document.querySelectorAll('.faq-item');
+                
+                document.querySelectorAll('.highlight').forEach(el => {
+                    const parent = el.parentElement;
+                    parent.replaceChild(document.createTextNode(el.textContent), el);
+                    parent.normalize();
+                });
+                
+                if (searchTerm === '') {
+                    faqItems.forEach(item => item.style.display = '');
+                    return;
+                }
+                
+                let hasResults = false;
+                
+                faqItems.forEach(item => {
+                    const question = item.querySelector('.faq-question').textContent.toLowerCase();
+                    const answer = item.querySelector('.faq-answer').textContent.toLowerCase();
+                    const matches = question.includes(searchTerm) || answer.includes(searchTerm);
+                    
+                    item.style.display = matches ? '' : 'none';
+                    
+                    if (matches) {
+                        hasResults = true;
+                        if (question.includes(searchTerm)) {
+                            const qElement = item.querySelector('.faq-question');
+                            const originalText = qElement.childNodes[0].textContent;
+                            const regex = new RegExp(`(${searchTerm.replace(/[.*+?^${}()|[\]\\]/g, '\\$&')})`, 'gi');
+                            const highlighted = originalText.replace(regex, '<span class="highlight">$1</span>');
+                            qElement.childNodes[0].textContent = '';
+                            const span = document.createElement('span');
+                            span.innerHTML = highlighted;
+                            qElement.insertBefore(span, qElement.childNodes[0]);
+                        }
+                    }
+                });
+                
+                faqItems.forEach(item => {
+                    if (item.style.display !== 'none') {
+                        item.classList.add('active');
+                    }
+                });
+                
+                if (!hasResults) {
+                    const noResults = document.createElement('div');
+                    noResults.className = 'note';
+                    noResults.style.textAlign = 'center';
+                    noResults.style.padding = '20px';
+                    noResults.innerHTML = '🔍 No results found. Try different keywords or <a href="#report-issue" style="color:#ff9900;">contact support</a>.';
+                    
+                    const existing = document.querySelector('.no-results-message');
+                    if (existing) existing.remove();
+                    noResults.classList.add('no-results-message');
+                    const firstFaq = document.querySelector('.faq-section');
+                    if (firstFaq) firstFaq.insertBefore(noResults, firstFaq.querySelector('.faq-item'));
+                } else {
+                    const existing = document.querySelector('.no-results-message');
+                    if (existing) existing.remove();
+                }
+            });
+        }
+
+        // Smooth scroll for anchor links
+        document.querySelectorAll('.quick-link').forEach(link => {
+            link.addEventListener('click', (e) => {
+                e.preventDefault();
+                const targetId = link.getAttribute('href').substring(1);
+                const target = document.getElementById(targetId);
+                if (target) {
+                    target.scrollIntoView({ behavior: 'smooth', block: 'start' });
+                }
+            });
+        });
+
+        // Copy email to clipboard
+        function copyEmail() {
+            const email = 'support@amazonquickview.net';
+            navigator.clipboard.writeText(email).then(() => {
+                showToast('📧 Email copied to clipboard!');
+            }).catch(() => {
+                showToast('Could not copy. Please select manually.');
+            });
+        }
+
+        function showToast(message) {
+            const toast = document.createElement('div');
+            toast.className = 'toast-message';
+            toast.textContent = message;
+            document.body.appendChild(toast);
+            setTimeout(() => {
+                toast.remove();
+            }, 2000);
+        }
+
+        window.copyEmail = copyEmail;
+    </script>
+</body>
+</html>

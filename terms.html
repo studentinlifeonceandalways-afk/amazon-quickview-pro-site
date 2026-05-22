@@ -1,0 +1,562 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Terms of Service - Amazon Quick View Pro</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, 'Helvetica Neue', Arial, sans-serif;
+            background: linear-gradient(135deg, #f5f7fa 0%, #e9eef5 100%);
+            min-height: 100vh;
+            padding: 40px 20px;
+        }
+
+        .container {
+            max-width: 1000px;
+            margin: 0 auto;
+            background: #ffffff;
+            border-radius: 24px;
+            box-shadow: 0 20px 40px rgba(0, 0, 0, 0.08);
+            overflow: hidden;
+        }
+
+        .header {
+            background: linear-gradient(135deg, #1e293b, #0f172a);
+            padding: 40px 32px;
+            text-align: center;
+        }
+
+        .logo-icon {
+            width: 64px;
+            height: 64px;
+            background: linear-gradient(135deg, #ff9900, #ffb347);
+            border-radius: 20px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin: 0 auto 16px;
+            box-shadow: 0 8px 20px rgba(255, 153, 0, 0.25);
+        }
+
+        .logo-icon svg {
+            width: 32px;
+            height: 32px;
+        }
+
+        .header h1 {
+            color: #ffffff;
+            font-size: 28px;
+            font-weight: 700;
+            margin-bottom: 8px;
+        }
+
+        .header .version {
+            color: #94a3b8;
+            font-size: 14px;
+        }
+
+        .last-updated {
+            background: #f8fafc;
+            padding: 12px 24px;
+            text-align: center;
+            font-size: 13px;
+            color: #64748b;
+            border-bottom: 1px solid #eef2f6;
+        }
+
+        .content {
+            padding: 32px;
+        }
+
+        .section {
+            margin-bottom: 32px;
+        }
+
+        .section h2 {
+            font-size: 20px;
+            font-weight: 600;
+            color: #1e293b;
+            margin-bottom: 16px;
+            padding-bottom: 8px;
+            border-bottom: 2px solid #ff9900;
+            display: inline-block;
+        }
+
+        .section h3 {
+            font-size: 16px;
+            font-weight: 600;
+            color: #334155;
+            margin: 20px 0 12px 0;
+        }
+
+        .section p {
+            font-size: 14px;
+            line-height: 1.6;
+            color: #475569;
+            margin-bottom: 12px;
+        }
+
+        .section ul, .section ol {
+            margin: 12px 0 12px 24px;
+        }
+
+        .section li {
+            font-size: 14px;
+            line-height: 1.6;
+            color: #475569;
+            margin-bottom: 8px;
+        }
+
+        .warning-box {
+            background: #fef3c7;
+            border-left: 4px solid #f59e0b;
+            padding: 16px 20px;
+            border-radius: 12px;
+            margin: 20px 0;
+        }
+
+        .warning-box h4 {
+            color: #92400e;
+            font-size: 14px;
+            font-weight: 600;
+            margin-bottom: 8px;
+        }
+
+        .warning-box p {
+            color: #78350f;
+            margin-bottom: 0;
+        }
+
+        .info-box {
+            background: #e0f2fe;
+            border-left: 4px solid #0284c7;
+            padding: 16px 20px;
+            border-radius: 12px;
+            margin: 20px 0;
+        }
+
+        .info-box h4 {
+            color: #0369a1;
+            font-size: 14px;
+            font-weight: 600;
+            margin-bottom: 8px;
+        }
+
+        .info-box p {
+            color: #0c4a6e;
+            margin-bottom: 0;
+        }
+
+        .success-box {
+            background: #dcfce7;
+            border-left: 4px solid #10b981;
+            padding: 16px 20px;
+            border-radius: 12px;
+            margin: 20px 0;
+        }
+
+        .success-box h4 {
+            color: #166534;
+            font-size: 14px;
+            font-weight: 600;
+            margin-bottom: 8px;
+        }
+
+        .success-box p {
+            color: #14532d;
+            margin-bottom: 0;
+        }
+
+        .toc {
+            background: #f8fafc;
+            border-radius: 16px;
+            padding: 20px 24px;
+            margin-bottom: 32px;
+        }
+
+        .toc h3 {
+            margin-top: 0;
+            margin-bottom: 16px;
+            color: #1e293b;
+        }
+
+        .toc ul {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 12px;
+            list-style: none;
+            margin: 0;
+        }
+
+        .toc li {
+            margin: 0;
+        }
+
+        .toc a {
+            color: #ff9900;
+            text-decoration: none;
+            font-size: 13px;
+            font-weight: 500;
+            padding: 4px 12px;
+            background: #ffffff;
+            border-radius: 20px;
+            border: 1px solid #e2e8f0;
+            transition: all 0.2s ease;
+        }
+
+        .toc a:hover {
+            background: #ff9900;
+            color: white;
+            border-color: #ff9900;
+        }
+
+        .contact-box {
+            background: #f8fafc;
+            border-radius: 16px;
+            padding: 24px;
+            margin-top: 24px;
+            text-align: center;
+            border: 1px solid #eef2f6;
+        }
+
+        .contact-box h3 {
+            margin-top: 0;
+            color: #1e293b;
+        }
+
+        .footer {
+            background: #f8fafc;
+            padding: 20px 32px;
+            text-align: center;
+            border-top: 1px solid #eef2f6;
+            font-size: 12px;
+            color: #94a3b8;
+        }
+
+        .footer a {
+            color: #ff9900;
+            text-decoration: none;
+        }
+
+        .footer a:hover {
+            text-decoration: underline;
+        }
+
+        @media (max-width: 600px) {
+            .content {
+                padding: 20px;
+            }
+            .header h1 {
+                font-size: 22px;
+            }
+            .section h2 {
+                font-size: 18px;
+            }
+            .toc ul {
+                flex-direction: column;
+                gap: 8px;
+            }
+            .toc a {
+                display: inline-block;
+            }
+        }
+
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(10px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        .container {
+            animation: fadeIn 0.3s ease-out;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="header">
+            <div class="logo-icon">
+                <svg width="32" height="32" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                    <path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm0 4c1.1 0 2 .9 2 2s-.9 2-2 2-2-.9-2-2 .9-2 2-2zm0 13c-2.33 0-4.31-1.46-5.11-3.5h10.22c-.8 2.04-2.78 3.5-5.11 3.5z" fill="white"/>
+                </svg>
+            </div>
+            <h1>Terms of Service</h1>
+            <div class="version">Amazon Quick View Pro</div>
+        </div>
+        
+        <div class="last-updated">
+            Last Updated: May 22, 2026 | Effective Date: May 22, 2026
+        </div>
+
+        <div class="content">
+            <!-- Table of Contents -->
+            <div class="toc">
+                <h3>📑 Table of Contents</h3>
+                <ul>
+                    <li><a href="#agreement">1. Agreement</a></li>
+                    <li><a href="#license">2. License</a></li>
+                    <li><a href="#eligibility">3. Eligibility</a></li>
+                    <li><a href="#account">4. Account & Security</a></li>
+                    <li><a href="#usage">5. Usage Guidelines</a></li>
+                    <li><a href="#prohibited">6. Prohibited Uses</a></li>
+                    <li><a href="#intellectual">7. Intellectual Property</a></li>
+                    <li><a href="#thirdparty">8. Third-Party Services</a></li>
+                    <li><a href="#disclaimers">9. Disclaimers</a></li>
+                    <li><a href="#liability">10. Limitation of Liability</a></li>
+                    <li><a href="#indemnification">11. Indemnification</a></li>
+                    <li><a href="#termination">12. Termination</a></li>
+                    <li><a href="#changes">13. Changes to Terms</a></li>
+                    <li><a href="#governing">14. Governing Law</a></li>
+                    <li><a href="#contact">15. Contact Information</a></li>
+                </ul>
+            </div>
+
+            <div class="section" id="agreement">
+                <h2>1. Agreement to Terms</h2>
+                <p>By installing, accessing, or using the Amazon Quick View Pro Chrome extension ("the Extension", "we", "our", "us"), you agree to be bound by these Terms of Service ("Terms"). If you do not agree to these Terms, do not install or use the Extension.</p>
+                <p>These Terms constitute a legally binding agreement between you ("User", "you") and the developers of Amazon Quick View Pro.</p>
+            </div>
+
+            <div class="section" id="license">
+                <h2>2. License to Use</h2>
+                <p>We grant you a non-exclusive, non-transferable, revocable license to install and use the Extension for your personal or business purposes, subject to these Terms. This license is limited to:</p>
+                <ul>
+                    <li><strong>Personal Use:</strong> Researching products on Amazon for your own business or personal needs</li>
+                    <li><strong>Business Use:</strong> Product research for Amazon FBA or online selling businesses</li>
+                    <li><strong>Single Installation:</strong> One copy of the Extension per device per user</li>
+                </ul>
+                <div class="info-box">
+                    <h4>ℹ️ What You CAN Do</h4>
+                    <p>✓ Use the Extension for Amazon product research<br>
+                    ✓ Bookmark and organize products you are researching<br>
+                    ✓ Export your research data for personal analysis<br>
+                    ✓ Sync your data across your own devices (with cloud account)</p>
+                </div>
+            </div>
+
+            <div class="section" id="eligibility">
+                <h2>3. Eligibility</h2>
+                <p>By using the Extension, you represent and warrant that:</p>
+                <ul>
+                    <li>You are at least 13 years of age (or the age of digital consent in your jurisdiction)</li>
+                    <li>You have the authority to enter into these Terms</li>
+                    <li>You will comply with all applicable laws and regulations</li>
+                    <li>You are not located in a country subject to US trade sanctions</li>
+                    <li>You are not on the US Treasury Department's list of Specially Designated Nationals</li>
+                </ul>
+            </div>
+
+            <div class="section" id="account">
+                <h2>4. Account Creation & Security</h2>
+                <p>If you choose to create a cloud synchronization account:</p>
+                <ul>
+                    <li><strong>Account Responsibility:</strong> You are solely responsible for maintaining the confidentiality of your login credentials</li>
+                    <li><strong>Activity Liability:</strong> You are responsible for all activities that occur under your account</li>
+                    <li><strong>Unauthorized Access:</strong> You must immediately notify us of any unauthorized access to your account</li>
+                    <li><strong>Accurate Information:</strong> You must provide accurate and complete registration information</li>
+                    <li><strong>Single Account:</strong> You may not create multiple accounts to circumvent limitations or restrictions</li>
+                </ul>
+                <div class="warning-box">
+                    <h4>⚠️ Account Security Notice</h4>
+                    <p>We will never ask for your password. Use a unique, strong password for your account and do not share it with anyone. Enable two-factor authentication if available through Supabase.</p>
+                </div>
+            </div>
+
+            <div class="section" id="usage">
+                <h2>5. Usage Guidelines</h2>
+                <p>When using the Extension, you agree to:</p>
+                <ul>
+                    <li>Use the Extension only for legitimate product research purposes</li>
+                    <li>Respect Amazon's Terms of Service (see section below regarding Amazon's policies)</li>
+                    <li>Not use the Extension to violate any intellectual property rights</li>
+                    <li>Not use the Extension to harass, abuse, or harm others</li>
+                    <li>Not use the Extension to distribute malware, spam, or harmful content</li>
+                    <li>Not reverse engineer, decompile, or disassemble the Extension</li>
+                    <li>Not modify, adapt, or create derivative works of the Extension</li>
+                    <li>Not remove any copyright or proprietary notices from the Extension</li>
+                </ul>
+            </div>
+
+            <div class="section" id="prohibited">
+                <h2>6. Prohibited Uses</h2>
+                <p>The following uses of the Extension are strictly prohibited:</p>
+                <ul>
+                    <li><strong>Excessive Automated Access:</strong> Using the Extension to scrape Amazon at rates that exceed reasonable use (bulk checker has built-in rate limits)</li>
+                    <li><strong>Bot Networks:</strong> Using the Extension as part of a botnet or distributed scraping network</li>
+                    <li><strong>Circumvention:</strong> Bypassing any rate limits, CAPTCHAs, or access controls implemented by Amazon</li>
+                    <li><strong>Resale:</strong> Selling access to the Extension or data obtained through the Extension</li>
+                    <li><strong>Illegal Activities:</strong> Using the Extension for any illegal purpose or to facilitate illegal activities</li>
+                    <li><strong>Data Mining:</strong> Using the Extension to build competing product databases or services</li>
+                    <li><strong>Amazon Policy Violations:</strong> Using the Extension in any way that violates Amazon's Seller Policies or Terms of Service</li>
+                </ul>
+                <div class="warning-box">
+                    <h4>⚖️ Amazon's Terms of Service</h4>
+                    <p>Amazon Quick View Pro is an independent tool that extracts publicly visible product information. While we design the Extension to work within reasonable limits, you are responsible for ensuring your use complies with Amazon's Terms of Service. Excessive automated access may violate Amazon's policies and could result in restrictions on your Amazon account.</p>
+                </div>
+            </div>
+
+            <div class="section" id="intellectual">
+                <h2>7. Intellectual Property</h2>
+                
+                <h3>7.1 Our IP</h3>
+                <p>The Extension, including its code, design, layout, graphics, and documentation, is owned by us and protected by copyright, trademark, and other intellectual property laws. You are granted a license to use the Extension, not ownership of it.</p>
+                
+                <h3>7.2 Amazon IP</h3>
+                <p>Amazon, the Amazon logo, Amazon FBA, and all Amazon product information (including ASINs, titles, images, and BSR data) are the property of Amazon.com, Inc. or its affiliates. This Extension is not affiliated with, endorsed by, or sponsored by Amazon.</p>
+                
+                <h3>7.3 Your Data</h3>
+                <p>You retain all ownership rights to the research data you collect using the Extension (profiles, bookmarks, categories). We do not claim ownership of your data. By using cloud sync, you grant us a license to store and transmit your data to provide the service.</p>
+            </div>
+
+            <div class="section" id="thirdparty">
+                <h2>8. Third-Party Services</h2>
+                <p>The Extension integrates with the following third-party services:</p>
+                <ul>
+                    <li><strong>Supabase</strong> - Authentication and cloud data storage (optional)</li>
+                    <li><strong>Cloudflare Workers</strong> - Exchange rate fetching and BSR extraction</li>
+                    <li><strong>Chrome APIs</strong> - Local storage, side panel, downloads</li>
+                </ul>
+                <p>Your use of these third-party services is subject to their respective terms and privacy policies. We are not responsible for the practices of these third parties.</p>
+            </div>
+
+            <div class="section" id="disclaimers">
+                <h2>9. Disclaimers</h2>
+                
+                <div class="warning-box">
+                    <h4>⚠️ No Warranty</h4>
+                    <p>THE EXTENSION IS PROVIDED "AS IS" AND "AS AVAILABLE" WITHOUT WARRANTIES OF ANY KIND, EITHER EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO IMPLIED WARRANTIES OF MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE, AND NON-INFRINGEMENT.</p>
+                </div>
+                
+                <h3>9.1 Profit Calculations</h3>
+                <p>All profit calculations provided by the Extension are <strong>estimates only</strong>. Actual profits may vary based on:</p>
+                <ul>
+                    <li>Changes in Amazon's fee structure</li>
+                    <li>Unforeseen costs not included in your profile</li>
+                    <li>Fluctuations in exchange rates</li>
+                    <li>Returns, refunds, or chargebacks</li>
+                    <li>Storage fees, long-term storage fees, or removal fees</li>
+                    <li>Changes in your product's price or rank</li>
+                </ul>
+                <p>You should verify all calculations independently. We are not responsible for any financial decisions you make based on Extension-provided calculations.</p>
+                
+                <h3>9.2 BSR and Product Data</h3>
+                <p>BSR (Best Sellers Rank) and other product data are extracted from Amazon's public pages. Amazon may change their page structure at any time, which may affect data accuracy or availability. We do not guarantee that BSR or other product data will always be available or accurate.</p>
+                
+                <h3>9.3 Availability</h3>
+                <p>We do not guarantee that the Extension will be available at all times. We may perform maintenance, updates, or changes that temporarily affect availability. Amazon may also change their website in ways that break Extension functionality.</p>
+            </div>
+
+            <div class="section" id="liability">
+                <h2>10. Limitation of Liability</h2>
+                <div class="warning-box">
+                    <h4>⚠️ No Liability for Damages</h4>
+                    <p>TO THE MAXIMUM EXTENT PERMITTED BY LAW, WE SHALL NOT BE LIABLE FOR ANY INDIRECT, INCIDENTAL, SPECIAL, CONSEQUENTIAL, OR PUNITIVE DAMAGES, INCLUDING BUT NOT LIMITED TO LOSS OF PROFITS, LOSS OF DATA, BUSINESS INTERRUPTION, OR REPUTATIONAL HARM, ARISING OUT OF OR RELATING TO YOUR USE OF OR INABILITY TO USE THE EXTENSION.</p>
+                </div>
+                <p>Our total liability to you for any claims arising from these Terms or your use of the Extension shall not exceed the amount you paid to us (if any) or $10 USD, whichever is less.</p>
+                <p>Some jurisdictions do not allow the exclusion or limitation of certain damages, so some of the above limitations may not apply to you.</p>
+            </div>
+
+            <div class="section" id="indemnification">
+                <h2>11. Indemnification</h2>
+                <p>You agree to indemnify, defend, and hold harmless the developers of Amazon Quick View Pro, its affiliates, and their respective officers, directors, employees, and agents from and against any and all claims, damages, losses, liabilities, costs, and expenses (including reasonable attorneys' fees) arising out of or relating to:</p>
+                <ul>
+                    <li>Your use or misuse of the Extension</li>
+                    <li>Your violation of these Terms</li>
+                    <li>Your violation of any third-party rights, including Amazon's Terms of Service</li>
+                    <li>Your violation of any applicable laws or regulations</li>
+                </ul>
+            </div>
+
+            <div class="section" id="termination">
+                <h2>12. Termination</h2>
+                <h3>12.1 Termination by You</h3>
+                <p>You may terminate your agreement with us at any time by uninstalling the Extension and deleting your cloud account (if created). Uninstalling the Extension will remove all locally stored data.</p>
+                
+                <h3>12.2 Termination by Us</h3>
+                <p>We may suspend or terminate your access to the Extension at any time, without notice, for any reason, including but not limited to:</p>
+                <ul>
+                    <li>Violation of these Terms</li>
+                    <li>Abuse or misuse of the Extension</li>
+                    <li>Excessive usage that impacts service stability</li>
+                    <li>Any other reason we deem appropriate</li>
+                </ul>
+                
+                <h3>12.3 Effect of Termination</h3>
+                <p>Upon termination, your right to use the Extension will immediately cease. If you have a cloud account, your cloud data may be deleted after a reasonable period. Your locally stored data will remain unless you uninstall the Extension.</p>
+            </div>
+
+            <div class="section" id="changes">
+                <h2>13. Changes to These Terms</h2>
+                <p>We reserve the right to modify these Terms at any time. If we make material changes, we will notify you by:</p>
+                <ul>
+                    <li>Posting the updated Terms within the Extension</li>
+                    <li>Updating the "Last Updated" date at the top of this page</li>
+                    <li>Displaying a notification within the Extension for significant changes</li>
+                </ul>
+                <p>Your continued use of the Extension after changes become effective constitutes your acceptance of the updated Terms. If you do not agree to the updated Terms, you must uninstall the Extension.</p>
+            </div>
+
+            <div class="section" id="governing">
+                <h2>14. Governing Law</h2>
+                <p>These Terms shall be governed by and construed in accordance with the laws of the State of Delaware, United States, without regard to its conflict of law principles.</p>
+                <p>Any dispute arising from these Terms or your use of the Extension shall be resolved exclusively in the state or federal courts located in Delaware, United States.</p>
+            </div>
+
+            <div class="section" id="miscellaneous">
+                <h2>15. Miscellaneous Provisions</h2>
+                <ul>
+                    <li><strong>Entire Agreement:</strong> These Terms constitute the entire agreement between you and us regarding the Extension.</li>
+                    <li><strong>Severability:</strong> If any provision of these Terms is found to be unenforceable, the remaining provisions shall remain in full force and effect.</li>
+                    <li><strong>Waiver:</strong> Our failure to enforce any right or provision of these Terms shall not constitute a waiver of such right or provision.</li>
+                    <li><strong>Assignment:</strong> You may not assign your rights under these Terms without our prior written consent. We may assign our rights at any time without notice.</li>
+                    <li><strong>No Relationship:</strong> These Terms do not create any partnership, joint venture, employment, or agency relationship between you and us.</li>
+                </ul>
+            </div>
+
+            <div class="section" id="disclaimer-amazon">
+                <h2>16. Amazon Disclaimer</h2>
+                <div class="info-box">
+                    <h4>📌 NOT AFFILIATED WITH AMAZON</h4>
+                    <p><strong>Amazon Quick View Pro is not affiliated with, endorsed by, or sponsored by Amazon.com, Inc.</strong></p>
+                    <p>AMAZON, the AMAZON logo, AMAZON FBA, and all related logos and product names are trademarks of Amazon.com, Inc. or its affiliates. Use of these names does not imply any affiliation with or endorsement by Amazon.</p>
+                    <p style="margin-top: 8px;">The Extension is an independent tool created by third-party developers to assist Amazon sellers and researchers. All product data displayed is publicly available information from Amazon's website.</p>
+                </div>
+            </div>
+
+            <div class="section" id="contact">
+                <h2>17. Contact Information</h2>
+                <div class="contact-box">
+                    <h3>📧 Legal and Support Inquiries</h3>
+                    <p>For questions about these Terms of Service or legal matters:</p>
+                    <p><strong>Email:</strong> <a href="mailto:legal@amazonquickview.net" style="color: #ff9900;">legal@amazonquickview.net</a></p>
+                    <p style="margin-top: 8px;">For general support or technical issues:</p>
+                    <p><strong>Email:</strong> <a href="mailto:support@amazonquickview.net" style="color: #ff9900;">support@amazonquickview.net</a></p>
+                    <p style="margin-top: 12px; font-size: 13px; color: #64748b;">We aim to respond to all inquiries within 3-5 business days.</p>
+                </div>
+            </div>
+
+            <div class="success-box">
+                <h4>✅ Acceptance of Terms</h4>
+                <p>By installing and using Amazon Quick View Pro, you acknowledge that you have read, understood, and agree to be bound by these Terms of Service and our <a href="privacy.html" style="color: #10b981; text-decoration: underline;">Privacy Policy</a>.</p>
+            </div>
+        </div>
+
+        <div class="footer">
+            <p>Amazon Quick View Pro - Professional Product Research Tool</p>
+            <p style="margin-top: 12px;">
+                <a href="privacy.html">Privacy Policy</a> | 
+                <a href="terms.html">Terms of Service</a> | 
+                <a href="#">Contact Support</a>
+            </p>
+            <p style="margin-top: 8px;">© 2026 Amazon Quick View Pro. All rights reserved.</p>
+            <p style="margin-top: 4px; font-size: 10px;">Version 5.0.0</p>
+        </div>
+    </div>
+</body>
+</html>
