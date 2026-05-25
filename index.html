@@ -587,31 +587,13 @@
         if(e.target.classList.contains('modal-overlay')) closeModal(e.target);
     };
     
-    // Updated Chrome Web Store link with the specific extension ID
-    const chromeUrl = "https://chromewebstore.google.com/detail/amazon-quick-book-multi-d/flmgbncninhjglohmmmgjbfibbblacba";
+    // Chrome Web Store link - Replace YOUR_EXTENSION_ID with actual ID
+    const chromeUrl = "https://chrome.google.com/webstore/detail/amazon-quick-view-pro/YOUR_EXTENSION_ID";
     const installBtns = document.querySelectorAll('#installCta, #installBtn');
     installBtns.forEach(btn => {
-        // If button is an anchor (<a>), update href and ensure it opens in new tab
-        if (btn.tagName === 'A') {
-            btn.href = chromeUrl;
-            btn.target = "_blank";
-        } else {
-            // If it's not an anchor (e.g., div or button), wrap or add click event
-            btn.addEventListener('click', (e) => {
-                e.preventDefault();
-                window.open(chromeUrl, '_blank');
-            });
-        }
+        btn.href = chromeUrl;
+        btn.target = "_blank";
     });
-    
-    // Also handle the upgrade button in pricing section to keep consistent
-    const upgradeBtn = document.querySelector('.pricing-card .btn-primary');
-    if(upgradeBtn && upgradeBtn.getAttribute('href') === '#') {
-        upgradeBtn.addEventListener('click', (e) => {
-            e.preventDefault();
-            window.open(chromeUrl, '_blank');
-        });
-    }
     
     // Smooth scroll
     document.querySelectorAll('a[href^="#"]').forEach(anchor => {
