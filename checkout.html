@@ -1,0 +1,89 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Amazon Quick View Pro — Checkout</title>
+  <style>
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+    body {
+      font-family: Inter, system-ui, -apple-system, sans-serif;
+      background: linear-gradient(135deg, #fff7ed 0%, #ffffff 50%, #fff7ed 100%);
+      min-height: 100vh;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      padding: 24px;
+      color: #0f172a;
+    }
+    .card {
+      background: #fff;
+      border-radius: 16px;
+      box-shadow: 0 4px 24px rgba(0,0,0,0.08);
+      padding: 40px 32px;
+      max-width: 420px;
+      width: 100%;
+      text-align: center;
+    }
+    h1 { font-size: 22px; margin-bottom: 8px; }
+    p { color: #64748b; line-height: 1.5; margin-bottom: 12px; }
+    .icon { font-size: 48px; margin-bottom: 16px; }
+    .hint { font-size: 14px; color: #94a3b8; }
+  </style>
+</head>
+<body>
+  <div class="card" id="content">
+    <div class="icon">💳</div>
+    <h1>Opening checkout…</h1>
+    <p>If the payment form didn't appear, allow pop-ups and refresh this page.</p>
+  </div>
+
+  <!--
+    DEPLOY: Upload this file to https://amazonquickview.net/checkout.html
+    Then in Paddle Sandbox:
+    1. Checkout → Website approval → add amazonquickview.net
+    2. Checkout → Checkout settings → Default payment link:
+       https://amazonquickview.net/checkout.html
+    3. Replace PADDLE_CLIENT_TOKEN below with your sandbox client-side token (starts with test_)
+  -->
+  <script src="https://cdn.paddle.com/paddle/v2/paddle.js"></script>
+  <script>
+    const PADDLE_CLIENT_TOKEN = 'live_dbfc493b44a68544baf87089607';
+
+    const params = new URLSearchParams(window.location.search);
+    const isSuccess = params.get('success') === '1';
+    const transactionId = params.get('_ptxn');
+
+    if (isSuccess) {
+      document.getElementById('content').innerHTML = `
+        <div class="icon">✅</div>
+        <h1>Payment successful!</h1>
+        <p>Return to the Amazon Quick View Pro extension. Your subscription activates within a few seconds.</p>
+        <p class="hint">Open the side panel and click "Refresh status" if needed.</p>
+      `;
+    } else if (PADDLE_CLIENT_TOKEN.includes('REPLACE_WITH')) {
+      document.getElementById('content').innerHTML = `
+        <div class="icon">⚠️</div>
+        <h1>Checkout not configured</h1>
+        <p>Set PADDLE_CLIENT_TOKEN in checkout.html (Paddle → Developer Tools → Client-side tokens).</p>
+      `;
+    } else {
+      Paddle.Initialize({
+        token: PADDLE_CLIENT_TOKEN,
+        checkout: {
+          settings: {
+            displayMode: 'overlay',
+            theme: 'light',
+            successUrl: window.location.origin + window.location.pathname + '?success=1'
+          }
+        }
+      });
+
+      // Explicit open when Paddle redirects here with ?_ptxn= (default payment link flow)
+      if (transactionId) {
+        Paddle.Checkout.open({ transactionId });
+      }
+    }
+  </script>
+</body>
+</html>
