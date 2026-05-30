@@ -376,6 +376,43 @@
             margin: 20px 0;
         }
 
+        .success-box {
+            background: #dcfce7;
+            border-left: 4px solid #10b981;
+            padding: 16px 20px;
+            border-radius: 12px;
+            margin: 20px 0;
+        }
+
+        /* Bookmark Flow Diagram */
+        .flow-diagram {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            flex-wrap: wrap;
+            gap: 16px;
+            margin: 32px 0;
+            padding: 24px;
+            background: #f8fafc;
+            border-radius: 20px;
+        }
+
+        .flow-step {
+            flex: 1;
+            text-align: center;
+            min-width: 150px;
+        }
+
+        .flow-arrow {
+            font-size: 24px;
+            color: #ff9900;
+        }
+
+        .flow-icon {
+            font-size: 40px;
+            margin-bottom: 12px;
+        }
+
         /* Buttons */
         .cta-button {
             display: inline-block;
@@ -421,6 +458,14 @@
             .nav-links {
                 display: none;
             }
+
+            .flow-diagram {
+                flex-direction: column;
+            }
+
+            .flow-arrow {
+                transform: rotate(90deg);
+            }
         }
     </style>
 </head>
@@ -440,6 +485,7 @@
                 <a href="#profit-calculator">Profit Calculator</a>
                 <a href="#scenarios">Case Scenarios</a>
                 <a href="#categories">Categories</a>
+                <a href="#bookmarking">Bookmarking</a>
                 <a href="#setup">How to Set Up</a>
             </div>
         </div>
@@ -448,7 +494,7 @@
     <!-- Hero -->
     <div class="hero">
         <h1>Master Your Amazon Profitability</h1>
-        <p>Learn how to use the Profit Calculator and Categories to make smarter sourcing decisions</p>
+        <p>Learn how to use the Profit Calculator, Categories, and Bookmarking to make smarter sourcing decisions</p>
     </div>
 
     <div class="container">
@@ -628,16 +674,108 @@
             </div>
         </div>
 
-        <!-- Categories Feature -->
+        <!-- ============ NEW: COMPREHENSIVE CATEGORIES SECTION ============ -->
         <div id="categories" class="section">
             <h2>
                 <span class="icon">📁</span>
-                Organize with Categories
+                Organize with Categories (Two-Way Sync)
             </h2>
             <div class="section-subtitle">
-                Group your research profiles to track performance across product types
+                Categories work BOTH ways - add profiles to categories OR add categories to profiles
             </div>
 
+            <div class="grid-2">
+                <!-- Method 1: Add Category to Profile -->
+                <div class="formula-card">
+                    <h3>📌 Method 1: Add Categories to a Profile</h3>
+                    <div class="success-box" style="margin: 16px 0; padding: 12px;">
+                        <strong>🎯 When to use this:</strong> When editing a profile, you want to assign it to existing categories.
+                    </div>
+                    <div class="step" style="margin-bottom: 16px;">
+                        <div class="step-number" style="width: 32px; height: 32px; font-size: 14px;">1</div>
+                        <div class="step-content">Click <strong>✏️ Edit</strong> on any profile card</div>
+                    </div>
+                    <div class="step" style="margin-bottom: 16px;">
+                        <div class="step-number" style="width: 32px; height: 32px; font-size: 14px;">2</div>
+                        <div class="step-content">Scroll to the <strong>🏷️ Categories</strong> section in the modal</div>
+                    </div>
+                    <div class="step" style="margin-bottom: 16px;">
+                        <div class="step-number" style="width: 32px; height: 32px; font-size: 14px;">3</div>
+                        <div class="step-content">Check the boxes next to categories you want to assign</div>
+                    </div>
+                    <div class="step">
+                        <div class="step-number" style="width: 32px; height: 32px; font-size: 14px;">4</div>
+                        <div class="step-content">Click <strong>Save Profile</strong> - category chips appear on the profile card!</div>
+                    </div>
+                    <div class="tip-box" style="margin-top: 16px;">
+                        💡 <strong>Result:</strong> The profile appears in the Categories tab under each selected category, and category chips show on the profile card.
+                    </div>
+                </div>
+
+                <!-- Method 2: Add Profile to Category -->
+                <div class="formula-card">
+                    <h3>📌 Method 2: Add Profiles to a Category</h3>
+                    <div class="success-box" style="margin: 16px 0; padding: 12px;">
+                        <strong>🎯 When to use this:</strong> When viewing a category, you want to add multiple profiles at once.
+                    </div>
+                    <div class="step" style="margin-bottom: 16px;">
+                        <div class="step-number" style="width: 32px; height: 32px; font-size: 14px;">1</div>
+                        <div class="step-content">Go to the <strong>Categories tab</strong> in sidebar</div>
+                    </div>
+                    <div class="step" style="margin-bottom: 16px;">
+                        <div class="step-number" style="width: 32px; height: 32px; font-size: 14px;">2</div>
+                        <div class="step-content">Click <strong>+ Add Profiles</strong> on any category</div>
+                    </div>
+                    <div class="step" style="margin-bottom: 16px;">
+                        <div class="step-number" style="width: 32px; height: 32px; font-size: 14px;">3</div>
+                        <div class="step-content">Search and select profiles to add (checkboxes)</div>
+                    </div>
+                    <div class="step">
+                        <div class="step-number" style="width: 32px; height: 32px; font-size: 14px;">4</div>
+                        <div class="step-content">Click <strong>Add to Category</strong> - profiles are now linked!</div>
+                    </div>
+                    <div class="tip-box" style="margin-top: 16px;">
+                        💡 <strong>Result:</strong> All selected profiles now show this category chip and appear in the category's profile list.
+                    </div>
+                </div>
+            </div>
+
+            <!-- Visual Example -->
+            <div class="success-box" style="margin-top: 24px;">
+                <strong>🔄 Real Example: Two-Way Sync in Action</strong><br><br>
+                <strong>Scenario:</strong> You create a category called "🏆 High Margin (>30%)"<br><br>
+                <strong>Option A:</strong> Edit the "Electronics" profile → Check "High Margin" box → Profile now shows the category chip<br>
+                <strong>Option B:</strong> Go to Categories tab → Click "+ Add Profiles" on "High Margin" → Select "Electronics" → Same result!<br><br>
+                <strong>✨ Either way works!</strong> The relationship is bidirectional and automatically syncs.
+            </div>
+
+            <!-- Category Management -->
+            <h3 style="margin: 32px 0 16px;">📋 Managing Categories</h3>
+            <div class="grid-3">
+                <div class="category-card">
+                    <div class="category-color" style="background: linear-gradient(135deg, #10b981, #059669);"></div>
+                    <h4>➕ Create Category</h4>
+                    <p>Click "New Category" in Categories tab, choose name, emoji, and color</p>
+                    <div class="category-stats">Auto-detects existing categories</div>
+                </div>
+
+                <div class="category-card">
+                    <div class="category-color" style="background: linear-gradient(135deg, #3b82f6, #2563eb);"></div>
+                    <h4>✏️ Edit Category</h4>
+                    <p>Click ✏️ Edit on any category to change name, emoji, or color</p>
+                    <div class="category-stats">Updates all profile chips automatically</div>
+                </div>
+
+                <div class="category-card">
+                    <div class="category-color" style="background: linear-gradient(135deg, #ef4444, #dc2626);"></div>
+                    <h4>🗑️ Delete Category</h4>
+                    <p>Delete a category - profiles become "Uncategorized" (no data loss!)</p>
+                    <div class="category-stats">Profiles retain all bookmarked products</div>
+                </div>
+            </div>
+
+            <!-- Category Stats Dashboard -->
+            <h3 style="margin: 32px 0 16px;">📊 Category Performance Dashboard</h3>
             <div class="grid-3">
                 <div class="category-card">
                     <div class="category-color" style="background: linear-gradient(135deg, #10b981, #059669);"></div>
@@ -660,25 +798,203 @@
                 </div>
 
                 <div class="category-card">
-                    <div class="category-color" style="background: linear-gradient(135deg, #ef4444, #dc2626);"></div>
-                    <h4>🔥 Discontinue / Reprice</h4>
-                    <p>Profiles with margin < 10%</p>
+                    <div class="category-color" style="background: linear-gradient(135deg, #8b5cf6, #7c3aed);"></div>
+                    <h4>🌍 International Expansion</h4>
+                    <p>UK, Germany, France marketplaces</p>
                     <div class="category-stats">
-                        📊 1 profile | 💰 Total Loss: -$890<br>
-                        📉 Avg Margin: 2% | ⚠️ 4 unprofitable products
+                        📊 4 profiles | 💰 Total Profit: $8,920<br>
+                        🌐 3 marketplaces | 📦 47 total products
                     </div>
                 </div>
             </div>
 
             <div class="tip-box" style="margin-top: 24px;">
-                <strong>🎯 Pro Tip:</strong> Create categories for:
+                <strong>🎯 Pro Tips for Categories:</strong>
                 <ul style="margin-top: 8px; margin-left: 20px;">
-                    <li>🏷️ <strong>By Niche:</strong> Electronics, Home & Kitchen, Beauty</li>
+                    <li>🏷️ <strong>By Niche:</strong> Electronics, Home & Kitchen, Beauty, Toys</li>
                     <li>💰 <strong>By Profitability:</strong> High Margin (30%+), Medium (15-30%), Low (<15%)</li>
-                    <li>📦 <strong>By Source:</strong> Alibaba Sourced, Wholesale, Dropship</li>
-                    <li>🌍 <strong>By Marketplace:</strong> US, UK, Germany, Japan</li>
+                    <li>📦 <strong>By Source:</strong> Alibaba Sourced, Wholesale, Dropship, Private Label</li>
+                    <li>🌍 <strong>By Marketplace:</strong> US, UK, Germany, Japan, Canada</li>
+                    <li>📊 <strong>By Season:</strong> Q4 Holiday, Back-to-School, Summer Deals</li>
+                    <li>⚠️ <strong>By Restriction:</strong> Gated Categories, Hazmat, IP Risk</li>
                 </ul>
-                Click the Categories tab in the sidebar to create your own!
+                Click the Categories tab in the sidebar to create your own categories today!
+            </div>
+        </div>
+
+        <!-- ============ NEW: COMPREHENSIVE BOOKMARKING SECTION ============ -->
+        <div id="bookmarking" class="section">
+            <h2>
+                <span class="icon">🔖</span>
+                Bookmark Products from Amazon Pages
+            </h2>
+            <div class="section-subtitle">
+                Save any product to your research profiles directly from Amazon search results or product pages
+            </div>
+
+            <!-- Visual Flow -->
+            <div class="flow-diagram">
+                <div class="flow-step">
+                    <div class="flow-icon">🛒</div>
+                    <div><strong>Browse Amazon</strong></div>
+                    <div style="font-size: 12px; color: #64748b;">Search results or product page</div>
+                </div>
+                <div class="flow-arrow">→</div>
+                <div class="flow-step">
+                    <div class="flow-icon">⭐</div>
+                    <div><strong>Click ★ Bookmark</strong></div>
+                    <div style="font-size: 12px; color: #64748b;">On any product badge</div>
+                </div>
+                <div class="flow-arrow">→</div>
+                <div class="flow-step">
+                    <div class="flow-icon">📁</div>
+                    <div><strong>Select Profile</strong></div>
+                    <div style="font-size: 12px; color: #64748b;">Choose which research profile</div>
+                </div>
+                <div class="flow-arrow">→</div>
+                <div class="flow-step">
+                    <div class="flow-icon">✅</div>
+                    <div><strong>Saved!</strong></div>
+                    <div style="font-size: 12px; color: #64748b;">View in sidebar under profile</div>
+                </div>
+            </div>
+
+            <div class="grid-2">
+                <!-- Search Results Bookmarking -->
+                <div class="formula-card">
+                    <h3>🔍 Bookmark from Search Results</h3>
+                    <div class="success-box" style="margin: 16px 0; padding: 12px;">
+                        Every product in Amazon search results gets an <strong>information badge</strong> with a ★ Bookmark button.
+                    </div>
+                    <div class="step" style="margin-bottom: 12px;">
+                        <div class="step-number" style="width: 32px; height: 32px; font-size: 14px;">1</div>
+                        <div class="step-content">Search for any product on Amazon</div>
+                    </div>
+                    <div class="step" style="margin-bottom: 12px;">
+                        <div class="step-number" style="width: 32px; height: 32px; font-size: 14px;">2</div>
+                        <div class="step-content">Look for the <strong>Amazon Quick View Pro badge</strong> below each product</div>
+                    </div>
+                    <div class="step" style="margin-bottom: 12px;">
+                        <div class="step-number" style="width: 32px; height: 32px; font-size: 14px;">3</div>
+                        <div class="step-content">Click <strong style="color: #10b981;">★ Bookmark</strong> button on the badge</div>
+                    </div>
+                    <div class="step">
+                        <div class="step-number" style="width: 32px; height: 32px; font-size: 14px;">4</div>
+                        <div class="step-content">Select a profile from the popup → Product saved!</div>
+                    </div>
+                    <div class="tip-box" style="margin-top: 16px;">
+                        💡 The badge shows ASIN, Title, Rating, Seller Info, BSR, and Profit Calculation before you even click!
+                    </div>
+                </div>
+
+                <!-- Product Page Bookmarking -->
+                <div class="formula-card">
+                    <h3>📄 Bookmark from Product Page</h3>
+                    <div class="success-box" style="margin: 16px 0; padding: 12px;">
+                        Individual product pages have a <strong>detailed badge</strong> with extended information.
+                    </div>
+                    <div class="step" style="margin-bottom: 12px;">
+                        <div class="step-number" style="width: 32px; height: 32px; font-size: 14px;">1</div>
+                        <div class="step-content">Open any product detail page (/dp/ASIN)</div>
+                    </div>
+                    <div class="step" style="margin-bottom: 12px;">
+                        <div class="step-number" style="width: 32px; height: 32px; font-size: 14px;">2</div>
+                        <div class="step-content">Scroll to find the badge (below price section)</div>
+                    </div>
+                    <div class="step" style="margin-bottom: 12px;">
+                        <div class="step-number" style="width: 32px; height: 32px; font-size: 14px;">3</div>
+                        <div class="step-content">Click <strong style="color: #10b981;">★ Bookmark</strong> button</div>
+                    </div>
+                    <div class="step">
+                        <div class="step-number" style="width: 32px; height: 32px; font-size: 14px;">4</div>
+                        <div class="step-content">Choose profile → Product saved with ALL data (including images!)</div>
+                    </div>
+                    <div class="tip-box" style="margin-top: 16px;">
+                        💡 Product page badges include the product image, full BSR breakdown, and more detailed seller info.
+                    </div>
+                </div>
+            </div>
+
+            <!-- Bookmark Management -->
+            <h3 style="margin: 32px 0 16px;">📋 Managing Your Bookmarks</h3>
+            <div class="grid-3">
+                <div class="category-card">
+                    <div class="category-color" style="background: linear-gradient(135deg, #10b981, #059669);"></div>
+                    <h4>📖 View Bookmarks</h4>
+                    <p>Open sidebar → Profiles tab → Expand any profile to see all bookmarked products</p>
+                    <div class="category-stats">Products show price, rating, profit, BSR, seller info</div>
+                </div>
+
+                <div class="category-card">
+                    <div class="category-color" style="background: linear-gradient(135deg, #3b82f6, #2563eb);"></div>
+                    <h4>🔄 Update Bookmark</h4>
+                    <p>Click the ★ button again → Select "Update Bookmark" from dropdown → Refreshes all data</p>
+                    <div class="category-stats">Updates price, BSR, rating, profit with latest values</div>
+                </div>
+
+                <div class="category-card">
+                    <div class="category-color" style="background: linear-gradient(135deg, #ef4444, #dc2626);"></div>
+                    <h4>✕ Remove Bookmark</h4>
+                    <p>Click the ★ button → Select "Remove Bookmark" from dropdown → Product removed</p>
+                    <div class="category-stats">Removes from all profiles (confirmation required)</div>
+                </div>
+            </div>
+
+            <!-- Bookmark Dropdown Explanation -->
+            <div class="success-box" style="margin-top: 24px;">
+                <strong>⭐ Bookmark Button Features (Click to see dropdown):</strong>
+                <ul style="margin-top: 12px; margin-left: 20px;">
+                    <li><strong>★ Bookmark</strong> - First-time save (opens profile selector)</li>
+                    <li><strong>★ Bookmarked ▼</strong> - Already saved (click for dropdown menu)</li>
+                    <li><strong>🔄 Update Bookmark</strong> - Refresh product data (price, BSR, rating, profit)</li>
+                    <li><strong>✕ Remove Bookmark</strong> - Delete from all profiles</li>
+                </ul>
+            </div>
+
+            <!-- What Gets Saved -->
+            <h3 style="margin: 32px 0 16px;">💾 What Gets Saved When You Bookmark</h3>
+            <div class="grid-2">
+                <div class="formula-card">
+                    <h4>📊 Product Information</h4>
+                    <div class="cost-row">ASIN (unique identifier)</div>
+                    <div class="cost-row">Title & Short Title</div>
+                    <div class="cost-row">Price & Price Value</div>
+                    <div class="cost-row">Rating & Review Count</div>
+                    <div class="cost-row">BSR Entries (all categories)</div>
+                    <div class="cost-row">Product URL</div>
+                    <div class="cost-row">Product Image URL</div>
+                </div>
+                <div class="formula-card">
+                    <h4>💰 Seller & Profit Data</h4>
+                    <div class="cost-row">Seller Name</div>
+                    <div class="cost-row">Is Amazon Sold?</div>
+                    <div class="cost-row">Is FBA?</div>
+                    <div class="cost-row">Buy Box Owner</div>
+                    <div class="cost-row">Net Profit (calculated)</div>
+                    <div class="cost-row">Profit Margin & ROI</div>
+                    <div class="cost-row">Profit Currency & Domain</div>
+                    <div class="cost-row">Last Updated Timestamp</div>
+                </div>
+            </div>
+
+            <div class="warning-box">
+                <strong>⚠️ Important Notes:</strong>
+                <ul style="margin-top: 8px; margin-left: 20px;">
+                    <li>Profit is calculated using the <strong>selected profile's settings</strong> at the time of bookmarking</li>
+                    <li>Different profiles = different profit calculations for the same product!</li>
+                    <li>Use "Update Bookmark" to refresh data with current profile settings</li>
+                    <li>Bookmarks sync to the cloud - accessible across all your devices</li>
+                </ul>
+            </div>
+
+            <div class="tip-box">
+                <strong>💡 Pro Tip - Use Multiple Profiles for the Same Product:</strong>
+                <ul style="margin-top: 8px; margin-left: 20px;">
+                    <li>Create "Conservative" profile (higher costs) vs "Aggressive" profile (lower costs)</li>
+                    <li>Bookmark the same product to both profiles to compare scenarios</li>
+                    <li>See how different FBA fees or shipping costs affect profitability</li>
+                    <li>Make data-driven sourcing decisions!</li>
+                </ul>
             </div>
         </div>
 
@@ -733,15 +1049,23 @@
                 <div class="step">
                     <div class="step-number">4</div>
                     <div class="step-content">
-                        <h3>Set as Active Profile</h3>
-                        <p>Click the checkbox or "Set as Active Profile" button. This profile will now be used for all badge calculations on Amazon pages.</p>
+                        <h3>Assign Categories (Optional but Recommended)</h3>
+                        <p>In the profile modal, scroll to the Categories section and check boxes for relevant categories. Or go to Categories tab → "+ Add Profiles" to add this profile later.</p>
                     </div>
                 </div>
 
                 <div class="step">
                     <div class="step-number">5</div>
                     <div class="step-content">
-                        <h3>Start Researching!</h3>
+                        <h3>Set as Active Profile</h3>
+                        <p>Click the checkbox or "Set as Active Profile" button. This profile will now be used for all badge calculations on Amazon pages.</p>
+                    </div>
+                </div>
+
+                <div class="step">
+                    <div class="step-number">6</div>
+                    <div class="step-content">
+                        <h3>Start Researching & Bookmarking!</h3>
                         <p>Browse Amazon - badges will appear showing profit calculated with YOUR costs. Click ★ to bookmark products to your profile for later analysis.</p>
                     </div>
                 </div>
@@ -754,6 +1078,7 @@
                     <li><strong>Forgetting Minimum Fees</strong> - US charges min $0.30, UK min £0.25, etc. The extension handles this automatically!</li>
                     <li><strong>Missing Media Closing Fees</strong> - Add $1.80 as Additional Cost for books/DVDs</li>
                     <li><strong>Wrong Quantity Setting</strong> - A 3-pack priced at $30 should have Quantity=3, not Quantity=1 with $30 price</li>
+                    <li><strong>Not Using Categories</strong> - Categories help you track performance across product types and make better decisions!</li>
                 </ul>
             </div>
 
@@ -764,11 +1089,13 @@
                     <li>📊 <strong>Referral Fee:</strong> Look up your category in Amazon's Referral Fee Schedule</li>
                     <li>📦 <strong>Quantity Setting:</strong> If you sell a 2-pack for $19.99, set Quantity=2 and Price=$19.99 (the calculator divides price per unit automatically)</li>
                     <li>🌍 <strong>Multiple Marketplaces:</strong> Create separate profiles for each domain (amazon.com vs amazon.co.uk) with correct FBA fees for each</li>
+                    <li>🏷️ <strong>Categories:</strong> Create categories for different sourcing strategies and use the dashboard to compare performance</li>
+                    <li>🔄 <strong>Update Bookmarks:</strong> Use the Update Bookmark feature weekly to keep profit calculations current with changing prices/BSR</li>
                 </ul>
             </div>
         </div>
 
-        <!-- Comparison Table -->
+        <!-- Quick Reference Table -->
         <div class="section">
             <h2>
                 <span class="icon">📋</span>
