@@ -1,0 +1,816 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Amazon Quick View Pro - Profit Calculator & Categories Guide</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+            background: linear-gradient(135deg, #f5f7fa 0%, #e9eef5 100%);
+            color: #1e293b;
+            line-height: 1.6;
+        }
+
+        /* Navigation */
+        .nav {
+            background: rgba(255, 255, 255, 0.98);
+            backdrop-filter: blur(10px);
+            border-bottom: 1px solid #eef2f6;
+            position: sticky;
+            top: 0;
+            z-index: 100;
+            padding: 0 24px;
+        }
+
+        .nav-container {
+            max-width: 1400px;
+            margin: 0 auto;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 12px 0;
+        }
+
+        .logo {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .logo-icon {
+            width: 32px;
+            height: 32px;
+            background: linear-gradient(135deg, #ff9900, #ffb347);
+            border-radius: 10px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .logo-icon svg {
+            width: 18px;
+            height: 18px;
+        }
+
+        .logo h1 {
+            font-size: 18px;
+            font-weight: 700;
+            background: linear-gradient(135deg, #1e293b, #3b4b66);
+            background-clip: text;
+            -webkit-background-clip: text;
+            color: transparent;
+        }
+
+        .nav-links {
+            display: flex;
+            gap: 24px;
+        }
+
+        .nav-links a {
+            text-decoration: none;
+            color: #64748b;
+            font-size: 14px;
+            font-weight: 500;
+            transition: color 0.2s;
+        }
+
+        .nav-links a:hover {
+            color: #ff9900;
+        }
+
+        /* Hero Section */
+        .hero {
+            background: linear-gradient(135deg, #1e293b 0%, #0f172a 100%);
+            color: white;
+            padding: 60px 24px 80px;
+            text-align: center;
+        }
+
+        .hero h1 {
+            font-size: 48px;
+            font-weight: 800;
+            margin-bottom: 16px;
+            letter-spacing: -0.02em;
+        }
+
+        .hero p {
+            font-size: 18px;
+            color: #94a3b8;
+            max-width: 600px;
+            margin: 0 auto;
+        }
+
+        /* Container */
+        .container {
+            max-width: 1200px;
+            margin: -40px auto 60px;
+            padding: 0 24px;
+        }
+
+        /* Section Styles */
+        .section {
+            background: white;
+            border-radius: 24px;
+            padding: 40px;
+            margin-bottom: 32px;
+            box-shadow: 0 4px 20px rgba(0, 0, 0, 0.05);
+        }
+
+        .section h2 {
+            font-size: 28px;
+            font-weight: 700;
+            margin-bottom: 12px;
+            display: flex;
+            align-items: center;
+            gap: 12px;
+        }
+
+        .section h2 .icon {
+            font-size: 32px;
+        }
+
+        .section-subtitle {
+            color: #64748b;
+            margin-bottom: 32px;
+            font-size: 16px;
+            border-bottom: 1px solid #eef2f6;
+            padding-bottom: 16px;
+        }
+
+        /* Grid Layout */
+        .grid-2 {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 32px;
+        }
+
+        .grid-3 {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 24px;
+        }
+
+        /* Cards */
+        .formula-card {
+            background: #f8fafc;
+            border-radius: 16px;
+            padding: 24px;
+            border: 1px solid #eef2f6;
+        }
+
+        .formula-card h3 {
+            font-size: 18px;
+            font-weight: 600;
+            margin-bottom: 16px;
+            color: #1e293b;
+        }
+
+        .formula {
+            background: #ffffff;
+            padding: 16px;
+            border-radius: 12px;
+            font-family: 'Monaco', 'Menlo', monospace;
+            font-size: 13px;
+            color: #c45500;
+            border-left: 3px solid #ff9900;
+            margin: 16px 0;
+            overflow-x: auto;
+        }
+
+        /* Scenario Cards */
+        .scenario-card {
+            background: #ffffff;
+            border: 1px solid #eef2f6;
+            border-radius: 20px;
+            overflow: hidden;
+            transition: all 0.3s ease;
+        }
+
+        .scenario-card:hover {
+            transform: translateY(-4px);
+            box-shadow: 0 12px 24px rgba(0, 0, 0, 0.1);
+        }
+
+        .scenario-header {
+            padding: 20px;
+            color: white;
+        }
+
+        .scenario-header.profit {
+            background: linear-gradient(135deg, #10b981, #059669);
+        }
+
+        .scenario-header.loss {
+            background: linear-gradient(135deg, #ef4444, #dc2626);
+        }
+
+        .scenario-header.break-even {
+            background: linear-gradient(135deg, #f59e0b, #d97706);
+        }
+
+        .scenario-header h3 {
+            font-size: 20px;
+            font-weight: 700;
+            margin-bottom: 8px;
+        }
+
+        .scenario-header .badge {
+            display: inline-block;
+            background: rgba(255, 255, 255, 0.2);
+            padding: 4px 12px;
+            border-radius: 20px;
+            font-size: 12px;
+            font-weight: 500;
+        }
+
+        .scenario-body {
+            padding: 20px;
+        }
+
+        .cost-row {
+            display: flex;
+            justify-content: space-between;
+            padding: 8px 0;
+            border-bottom: 1px solid #eef2f6;
+            font-size: 13px;
+        }
+
+        .cost-row.total {
+            font-weight: 700;
+            border-bottom: none;
+            margin-top: 8px;
+            padding-top: 12px;
+            border-top: 2px solid #eef2f6;
+        }
+
+        .profit-positive {
+            color: #10b981;
+            font-weight: 700;
+        }
+
+        .profit-negative {
+            color: #ef4444;
+            font-weight: 700;
+        }
+
+        /* Category Cards */
+        .category-card {
+            background: #f8fafc;
+            border-radius: 16px;
+            padding: 20px;
+            border: 1px solid #eef2f6;
+            transition: all 0.2s;
+        }
+
+        .category-card:hover {
+            border-color: #ff9900;
+            background: #fff8f0;
+        }
+
+        .category-color {
+            width: 40px;
+            height: 40px;
+            border-radius: 12px;
+            margin-bottom: 12px;
+        }
+
+        .category-card h4 {
+            font-size: 16px;
+            font-weight: 600;
+            margin-bottom: 8px;
+        }
+
+        .category-stats {
+            font-size: 12px;
+            color: #64748b;
+            margin-top: 12px;
+            padding-top: 12px;
+            border-top: 1px solid #eef2f6;
+        }
+
+        /* Steps */
+        .steps {
+            display: flex;
+            flex-direction: column;
+            gap: 24px;
+        }
+
+        .step {
+            display: flex;
+            gap: 20px;
+            align-items: flex-start;
+        }
+
+        .step-number {
+            width: 48px;
+            height: 48px;
+            background: linear-gradient(135deg, #ff9900, #ffb347);
+            border-radius: 24px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: white;
+            font-weight: 700;
+            font-size: 20px;
+            flex-shrink: 0;
+        }
+
+        .step-content {
+            flex: 1;
+        }
+
+        .step-content h3 {
+            font-size: 18px;
+            font-weight: 600;
+            margin-bottom: 8px;
+        }
+
+        /* Comparison Table */
+        .comparison-table {
+            width: 100%;
+            border-collapse: collapse;
+        }
+
+        .comparison-table th,
+        .comparison-table td {
+            padding: 12px;
+            text-align: left;
+            border-bottom: 1px solid #eef2f6;
+        }
+
+        .comparison-table th {
+            background: #f8fafc;
+            font-weight: 600;
+            color: #1e293b;
+        }
+
+        .comparison-table tr:hover {
+            background: #f8fafc;
+        }
+
+        /* Tips */
+        .tip-box {
+            background: #e0f2fe;
+            border-left: 4px solid #0284c7;
+            padding: 16px 20px;
+            border-radius: 12px;
+            margin: 20px 0;
+        }
+
+        .tip-box strong {
+            color: #0284c7;
+        }
+
+        .warning-box {
+            background: #fef3c7;
+            border-left: 4px solid #f59e0b;
+            padding: 16px 20px;
+            border-radius: 12px;
+            margin: 20px 0;
+        }
+
+        /* Buttons */
+        .cta-button {
+            display: inline-block;
+            background: linear-gradient(135deg, #ff9900, #ffb347);
+            color: white;
+            padding: 14px 32px;
+            border-radius: 12px;
+            text-decoration: none;
+            font-weight: 600;
+            transition: all 0.2s;
+            margin-top: 16px;
+        }
+
+        .cta-button:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 8px 20px rgba(255, 153, 0, 0.3);
+        }
+
+        /* Footer */
+        .footer {
+            background: #1e293b;
+            color: #94a3b8;
+            text-align: center;
+            padding: 40px;
+            font-size: 14px;
+        }
+
+        /* Responsive */
+        @media (max-width: 768px) {
+            .hero h1 {
+                font-size: 32px;
+            }
+
+            .grid-2,
+            .grid-3 {
+                grid-template-columns: 1fr;
+            }
+
+            .section {
+                padding: 24px;
+            }
+
+            .nav-links {
+                display: none;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- Navigation -->
+    <nav class="nav">
+        <div class="nav-container">
+            <div class="logo">
+                <div class="logo-icon">
+                    <svg width="18" height="18" viewBox="0 0 24 24" fill="none">
+                        <path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm0 4c1.1 0 2 .9 2 2s-.9 2-2 2-2-.9-2-2 .9-2 2-2zm0 13c-2.33 0-4.31-1.46-5.11-3.5h10.22c-.8 2.04-2.78 3.5-5.11 3.5z" fill="white"/>
+                    </svg>
+                </div>
+                <h1>Amazon Quick View Pro</h1>
+            </div>
+            <div class="nav-links">
+                <a href="#profit-calculator">Profit Calculator</a>
+                <a href="#scenarios">Case Scenarios</a>
+                <a href="#categories">Categories</a>
+                <a href="#setup">How to Set Up</a>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Hero -->
+    <div class="hero">
+        <h1>Master Your Amazon Profitability</h1>
+        <p>Learn how to use the Profit Calculator and Categories to make smarter sourcing decisions</p>
+    </div>
+
+    <div class="container">
+        <!-- Profit Calculator Section -->
+        <div id="profit-calculator" class="section">
+            <h2>
+                <span class="icon">💰</span>
+                How the Profit Calculator Works
+            </h2>
+            <div class="section-subtitle">
+                The extension calculates real profit using your custom cost inputs - not just revenue
+            </div>
+
+            <div class="grid-2">
+                <div class="formula-card">
+                    <h3>📐 The Profit Formula</h3>
+                    <div class="formula">
+                        Revenue = Price × Quantity<br>
+                        Total Fees = (Referral Fee × Qty) + (FBA Fee × Qty) + Storage Fee + Additional Costs<br>
+                        Total Costs = (COGS × Qty) + (Shipping × Qty) + (Ads × Qty) + (Revenue × Return Rate %)<br>
+                        <strong>Net Profit = Revenue - Total Fees - Total Costs</strong><br>
+                        Margin = (Net Profit / Revenue) × 100%<br>
+                        ROI = (Net Profit / Total Costs) × 100%
+                    </div>
+                    <div class="tip-box">
+                        <strong>💡 Key Insight:</strong> The calculator multiplies ALL costs by the Quantity setting. Set Quantity=2 for a 2-pack product, and everything scales automatically!
+                    </div>
+                </div>
+
+                <div class="formula-card">
+                    <h3>⚙️ Settings You Control (Per Profile)</h3>
+                    <div class="cost-row"><strong>📦 Product Cost (COGS)</strong> - Your cost to buy/manufacture</div>
+                    <div class="cost-row"><strong>🚚 Shipping to Amazon</strong> - Cost to send inventory to FBA</div>
+                    <div class="cost-row"><strong>📢 PPC Ads Cost</strong> - Estimated advertising per unit</div>
+                    <div class="cost-row"><strong>🔄 Return Rate (%)</strong> - Estimated product returns</div>
+                    <div class="cost-row"><strong>🏪 Storage Fee</strong> - Monthly storage per unit</div>
+                    <div class="cost-row"><strong>📬 FBA Fee</strong> - Amazon's fulfillment fee</div>
+                    <div class="cost-row"><strong>📊 Referral Fee (%)</strong> - Amazon's commission (customizable!)</div>
+                    <div class="cost-row"><strong>🔢 Quantity</strong> - Units per sale (multiplies all costs)</div>
+                </div>
+            </div>
+
+            <div class="warning-box">
+                <strong>⚠️ Important:</strong> Amazon's referral fees vary by category! Electronics = 8%, Clothing = 17%, Most categories = 15%. Always set the correct percentage for accurate profit calculations.
+            </div>
+        </div>
+
+        <!-- Real-World Scenarios -->
+        <div id="scenarios" class="section">
+            <h2>
+                <span class="icon">📊</span>
+                Real-World Case Scenarios
+            </h2>
+            <div class="section-subtitle">
+                See how different products perform with the same profit calculator settings
+            </div>
+
+            <div class="grid-3">
+                <!-- Scenario 1: Profitable Product -->
+                <div class="scenario-card">
+                    <div class="scenario-header profit">
+                        <h3>✅ High-Profit Winner</h3>
+                        <span class="badge">📈 +45% Margin</span>
+                    </div>
+                    <div class="scenario-body">
+                        <div class="cost-row"><strong>Product:</strong> Bluetooth Headphones</div>
+                        <div class="cost-row"><strong>Selling Price:</strong> $49.99</div>
+                        <div class="cost-row"><strong>Product Cost:</strong> $12.00</div>
+                        <div class="cost-row"><strong>Shipping to Amazon:</strong> $1.50</div>
+                        <div class="cost-row"><strong>FBA Fee:</strong> $4.75</div>
+                        <div class="cost-row"><strong>Referral Fee (15%):</strong> $7.50</div>
+                        <div class="cost-row"><strong>PPC Ads:</strong> $3.00</div>
+                        <div class="cost-row"><strong>Storage Fee:</strong> $0.25</div>
+                        <div class="cost-row"><strong>Return Rate (5%):</strong> $2.50</div>
+                        <div class="cost-row total"><strong>Total Costs:</strong> $31.50</div>
+                        <div class="cost-row total profit-positive"><strong>💰 Net Profit:</strong> $18.49</div>
+                        <div class="cost-row total profit-positive"><strong>📊 Margin:</strong> 37% | <strong>📈 ROI:</strong> 59%</div>
+                    </div>
+                </div>
+
+                <!-- Scenario 2: Break-Even Product -->
+                <div class="scenario-card">
+                    <div class="scenario-header break-even">
+                        <h3>⚠️ Break-Even Product</h3>
+                        <span class="badge">📊 2% Margin</span>
+                    </div>
+                    <div class="scenario-body">
+                        <div class="cost-row"><strong>Product:</strong> Phone Case (Generic)</div>
+                        <div class="cost-row"><strong>Selling Price:</strong> $12.99</div>
+                        <div class="cost-row"><strong>Product Cost:</strong> $4.00</div>
+                        <div class="cost-row"><strong>Shipping to Amazon:</strong> $0.80</div>
+                        <div class="cost-row"><strong>FBA Fee:</strong> $3.22</div>
+                        <div class="cost-row"><strong>Referral Fee (15%):</strong> $1.95</div>
+                        <div class="cost-row"><strong>PPC Ads:</strong> $2.00</div>
+                        <div class="cost-row"><strong>Storage Fee:</strong> $0.10</div>
+                        <div class="cost-row"><strong>Return Rate (8%):</strong> $1.04</div>
+                        <div class="cost-row total"><strong>Total Costs:</strong> $13.11</div>
+                        <div class="cost-row total profit-negative"><strong>💰 Net Profit:</strong> -$0.12</div>
+                        <div class="cost-row total profit-negative"><strong>📊 Margin:</strong> -1% | <strong>📈 ROI:</strong> -1%</div>
+                        <div class="tip-box" style="margin-top: 12px; font-size: 12px;">
+                            💡 <strong>What went wrong?</strong> Low price + high PPC costs = no profit.
+                            <strong>Fix:</strong> Raise price to $14.99 or lower ad spend.
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Scenario 3: High-Volume Product -->
+                <div class="scenario-card">
+                    <div class="scenario-header profit">
+                        <h3>📦 High-Volume Winner</h3>
+                        <span class="badge">Quantity: 6-Pack</span>
+                    </div>
+                    <div class="scenario-body">
+                        <div class="cost-row"><strong>Product:</strong> Kitchen Utensils (6-Pack)</div>
+                        <div class="cost-row"><strong>Selling Price:</strong> $24.99</div>
+                        <div class="cost-row"><strong>Quantity Setting:</strong> 6 (multiplies everything!)</div>
+                        <div class="cost-row"><strong>Per-Unit Price:</strong> $4.17</div>
+                        <div class="cost-row"><strong>Total Product Cost (6 units):</strong> $18.00</div>
+                        <div class="cost-row"><strong>Total FBA Fee (6 units):</strong> $19.32</div>
+                        <div class="cost-row"><strong>Total Referral Fee (15%):</strong> $3.75</div>
+                        <div class="cost-row"><strong>PPC (per sale):</strong> $2.00</div>
+                        <div class="cost-row total"><strong>Total Costs:</strong> $43.07</div>
+                        <div class="cost-row total profit-positive"><strong>💰 Net Profit:</strong> $6.87 per sale</div>
+                        <div class="cost-row total profit-positive"><strong>📊 Margin:</strong> 14% | <strong>📈 ROI:</strong> 16%</div>
+                        <div class="tip-box" style="margin-top: 12px; font-size: 12px;">
+                            💡 <strong>Key Insight:</strong> Setting Quantity=6 automatically multiplied ALL costs!
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Additional Scenarios: Different Fee Structures -->
+        <div class="section">
+            <h2>
+                <span class="icon">🌍</span>
+                Domain-Specific Scenarios
+            </h2>
+            <div class="section-subtitle">
+                How different marketplaces affect your profit calculation
+            </div>
+
+            <div class="grid-2">
+                <div class="scenario-card">
+                    <div class="scenario-header profit">
+                        <h3>🇺🇸 Amazon.com vs 🇬🇧 Amazon.co.uk</h3>
+                        <span class="badge">Same product, different profit</span>
+                    </div>
+                    <div class="scenario-body">
+                        <div class="cost-row"><strong>Product:</strong> Wireless Mouse</div>
+                        <div class="cost-row"><strong>US Price:</strong> $19.99</div>
+                        <div class="cost-row"><strong>US Profit:</strong> <span class="profit-positive">+$4.32</span> (22% margin)</div>
+                        <div class="cost-row"><strong>UK Price:</strong> £17.99</div>
+                        <div class="cost-row"><strong>UK Profit:</strong> <span class="profit-positive">+£2.15</span> (12% margin)</div>
+                        <div class="warning-box" style="margin-top: 12px; font-size: 12px;">
+                            ⚠️ <strong>Why the difference?</strong> UK has higher FBA fees (£0.25 minimum referral fee) and different exchange rates. Always create separate profiles per marketplace!
+                        </div>
+                    </div>
+                </div>
+
+                <div class="scenario-card">
+                    <div class="scenario-header break-even">
+                        <h3>🇪🇺 EU Marketplace (Germany/France/Italy/Spain)</h3>
+                        <span class="badge">European format handling</span>
+                    </div>
+                    <div class="scenario-body">
+                        <div class="cost-row"><strong>Product:</strong> Electronics Accessory</div>
+                        <div class="cost-row"><strong>Price:</strong> €29,99 (comma as decimal!)</div>
+                        <div class="cost-row"><strong>Referral Fee (15%):</strong> €4,50</div>
+                        <div class="cost-row"><strong>FBA Fee:</strong> €3,22</div>
+                        <div class="cost-row total"><strong>Net Profit:</strong> <span class="profit-positive">+€8,27</span></div>
+                        <div class="tip-box" style="margin-top: 12px; font-size: 12px;">
+                            💡 <strong>Automatic Formatting:</strong> The extension automatically converts "€29,99" to 29.99 for calculations, then formats back to "€29,99" for display!
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Categories Feature -->
+        <div id="categories" class="section">
+            <h2>
+                <span class="icon">📁</span>
+                Organize with Categories
+            </h2>
+            <div class="section-subtitle">
+                Group your research profiles to track performance across product types
+            </div>
+
+            <div class="grid-3">
+                <div class="category-card">
+                    <div class="category-color" style="background: linear-gradient(135deg, #10b981, #059669);"></div>
+                    <h4>🏆 High-Performing Products</h4>
+                    <p>Profiles with margin > 30%</p>
+                    <div class="category-stats">
+                        📊 3 profiles | 💰 Total Profit: $12,450<br>
+                        📈 Avg Margin: 42% | ✅ 23 profitable products
+                    </div>
+                </div>
+
+                <div class="category-card">
+                    <div class="category-color" style="background: linear-gradient(135deg, #f59e0b, #d97706);"></div>
+                    <h4>⚠️ Needs Optimization</h4>
+                    <p>Profiles with margin 10-20%</p>
+                    <div class="category-stats">
+                        📊 2 profiles | 💰 Total Profit: $3,210<br>
+                        📈 Avg Margin: 15% | 🔧 8 products to improve
+                    </div>
+                </div>
+
+                <div class="category-card">
+                    <div class="category-color" style="background: linear-gradient(135deg, #ef4444, #dc2626);"></div>
+                    <h4>🔥 Discontinue / Reprice</h4>
+                    <p>Profiles with margin < 10%</p>
+                    <div class="category-stats">
+                        📊 1 profile | 💰 Total Loss: -$890<br>
+                        📉 Avg Margin: 2% | ⚠️ 4 unprofitable products
+                    </div>
+                </div>
+            </div>
+
+            <div class="tip-box" style="margin-top: 24px;">
+                <strong>🎯 Pro Tip:</strong> Create categories for:
+                <ul style="margin-top: 8px; margin-left: 20px;">
+                    <li>🏷️ <strong>By Niche:</strong> Electronics, Home & Kitchen, Beauty</li>
+                    <li>💰 <strong>By Profitability:</strong> High Margin (30%+), Medium (15-30%), Low (<15%)</li>
+                    <li>📦 <strong>By Source:</strong> Alibaba Sourced, Wholesale, Dropship</li>
+                    <li>🌍 <strong>By Marketplace:</strong> US, UK, Germany, Japan</li>
+                </ul>
+                Click the Categories tab in the sidebar to create your own!
+            </div>
+        </div>
+
+        <!-- How to Set Up -->
+        <div id="setup" class="section">
+            <h2>
+                <span class="icon">🔧</span>
+                Step-by-Step Setup Guide
+            </h2>
+            <div class="section-subtitle">
+                Get accurate profit calculations in 5 minutes
+            </div>
+
+            <div class="steps">
+                <div class="step">
+                    <div class="step-number">1</div>
+                    <div class="step-content">
+                        <h3>Create a Research Profile</h3>
+                        <p>In the sidebar, click "New Product Profile". Give it a name like "Electronics Sourcing" and select your Amazon domain (amazon.com for US, amazon.co.uk for UK, etc.).</p>
+                    </div>
+                </div>
+
+                <div class="step">
+                    <div class="step-number">2</div>
+                    <div class="step-content">
+                        <h3>Enter Your Costs</h3>
+                        <p>Fill in your actual numbers:</p>
+                        <ul style="margin-top: 8px; margin-left: 20px;">
+                            <li><strong>Product Cost (COGS):</strong> What you pay your supplier</li>
+                            <li><strong>Shipping to Amazon:</strong> Freight cost per unit</li>
+                            <li><strong>FBA Fee:</strong> Use <a href="https://sellercentral.amazon.com/fba/revenuecalculator" target="_blank" style="color:#ff9900;">Amazon's FBA Revenue Calculator</a> to find this</li>
+                            <li><strong>Referral Fee %:</strong> 15% for most, 8% for electronics, 17% for clothing</li>
+                            <li><strong>Quantity:</strong> Set to number of units per pack (e.g., 2 for a 2-pack)</li>
+                        </ul>
+                    </div>
+                </div>
+
+                <div class="step">
+                    <div class="step-number">3</div>
+                    <div class="step-content">
+                        <h3>Add Additional Costs (Click the + button)</h3>
+                        <p>Many sellers forget these hidden fees:</p>
+                        <ul style="margin-top: 8px; margin-left: 20px;">
+                            <li><strong>🇺🇸 Media Closing Fee:</strong> $1.80 for books/DVDs (Fixed cost)</li>
+                            <li><strong>🌍 Digital Service Tax:</strong> 2-3% for EU/UK sales (Percentage cost)</li>
+                            <li><strong>🔧 Prep/Inspection Fee:</strong> If using a 3PL service</li>
+                            <li><strong>📦 Packaging/Insert Costs:</strong> Custom boxes, thank you cards</li>
+                        </ul>
+                    </div>
+                </div>
+
+                <div class="step">
+                    <div class="step-number">4</div>
+                    <div class="step-content">
+                        <h3>Set as Active Profile</h3>
+                        <p>Click the checkbox or "Set as Active Profile" button. This profile will now be used for all badge calculations on Amazon pages.</p>
+                    </div>
+                </div>
+
+                <div class="step">
+                    <div class="step-number">5</div>
+                    <div class="step-content">
+                        <h3>Start Researching!</h3>
+                        <p>Browse Amazon - badges will appear showing profit calculated with YOUR costs. Click ★ to bookmark products to your profile for later analysis.</p>
+                    </div>
+                </div>
+            </div>
+
+            <div class="warning-box" style="margin-top: 24px;">
+                <strong>⚠️ Common Mistakes to Avoid:</strong>
+                <ul style="margin-top: 8px; margin-left: 20px;">
+                    <li><strong>Wrong Referral Fee %</strong> - Electronics are 8%, NOT 15%!</li>
+                    <li><strong>Forgetting Minimum Fees</strong> - US charges min $0.30, UK min £0.25, etc. The extension handles this automatically!</li>
+                    <li><strong>Missing Media Closing Fees</strong> - Add $1.80 as Additional Cost for books/DVDs</li>
+                    <li><strong>Wrong Quantity Setting</strong> - A 3-pack priced at $30 should have Quantity=3, not Quantity=1 with $30 price</li>
+                </ul>
+            </div>
+
+            <div class="tip-box">
+                <strong>💡 Pro Tips for Maximum Accuracy:</strong>
+                <ul style="margin-top: 8px; margin-left: 20px;">
+                    <li>📬 <strong>FBA Fee:</strong> Always check Amazon's FBA Revenue Calculator for your product's exact size tier</li>
+                    <li>📊 <strong>Referral Fee:</strong> Look up your category in Amazon's Referral Fee Schedule</li>
+                    <li>📦 <strong>Quantity Setting:</strong> If you sell a 2-pack for $19.99, set Quantity=2 and Price=$19.99 (the calculator divides price per unit automatically)</li>
+                    <li>🌍 <strong>Multiple Marketplaces:</strong> Create separate profiles for each domain (amazon.com vs amazon.co.uk) with correct FBA fees for each</li>
+                </ul>
+            </div>
+        </div>
+
+        <!-- Comparison Table -->
+        <div class="section">
+            <h2>
+                <span class="icon">📋</span>
+                Quick Reference: Referral Fees by Category
+            </h2>
+            <div class="section-subtitle">
+                Use these percentages in your profile settings
+            </div>
+
+            <table class="comparison-table">
+                <thead>
+                    <tr>
+                        <th>Category</th>
+                        <th>Referral Fee</th>
+                        <th>Notes</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr><td>Electronics</td><td>8%</td><td>Accessories under $100 are 15%</td></tr>
+                    <tr><td>Clothing & Accessories</td><td>17%</td><td>Plus $1.80 closing fee for under $15</td></tr>
+                    <tr><td>Books, DVD, Music</td><td>15%</td><td>Plus $1.80 closing fee (US)</td></tr>
+                    <tr><td>Home & Kitchen</td><td>15%</td><td>Standard rate</td></tr>
+                    <tr><td>Beauty</td><td>15%</td><td>Standard rate</td></tr>
+                    <tr><td>Toys & Games</td><td>15%</td><td>Holiday adjustments possible</td></tr>
+                    <tr><td>Sports & Outdoors</td><td>15%</td><td>Standard rate</td></tr>
+                    <tr><td>Jewelry</td><td>20%</td><td>Under $250, 5% over $250</td></tr>
+                    <tr><td>Furniture</td><td>15%</td><td>10% over $200</td></tr>
+                </tbody>
+            </table>
+        </div>
+
+        <!-- Get Started CTA -->
+        <div style="text-align: center; margin-bottom: 40px;">
+            <a href="#" class="cta-button">🚀 Start Researching on Amazon →</a>
+            <p style="margin-top: 16px; font-size: 12px; color: #64748b;">Already have the extension? Open the side panel and create your first profile!</p>
+        </div>
+    </div>
+
+    <!-- Footer -->
+    <footer class="footer">
+        <p>Amazon Quick View Pro — Professional Amazon Product Research Tool</p>
+        <p style="margin-top: 8px; font-size: 12px;">Profit calculations are estimates. Always verify with Amazon's official fee schedules.</p>
+    </footer>
+</body>
+</html>
