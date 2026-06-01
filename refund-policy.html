@@ -1,0 +1,389 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
+  <title>Amazon Quick View Pro – Refund Policy | No Refund Policy</title>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:opsz,wght@14..32,300;14..32,400;14..32,500;14..32,600;14..32,700;14..32,800&display=swap" rel="stylesheet">
+  <style>
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    body {
+      background: linear-gradient(125deg, #f0f4fa 0%, #e9eef5 100%);
+      font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+      padding: 32px 20px;
+      min-height: 100vh;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      color: #1e293b;
+    }
+
+    /* subtle geometric background pattern */
+    body::before {
+      content: "";
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      background-image: 
+        radial-gradient(circle at 25% 40%, rgba(255, 153, 0, 0.03) 2px, transparent 2px),
+        repeating-linear-gradient(45deg, rgba(0,0,0,0.01) 0px, rgba(0,0,0,0.01) 1px, transparent 1px, transparent 12px);
+      background-size: 32px 32px, 20px 20px;
+      pointer-events: none;
+      z-index: 0;
+    }
+
+    .policy-card {
+      max-width: 820px;
+      width: 100%;
+      background: rgba(255, 255, 255, 0.98);
+      backdrop-filter: blur(0px);
+      border-radius: 36px;
+      box-shadow: 0 24px 48px -12px rgba(0, 0, 0, 0.2), 0 1px 2px rgba(0, 0, 0, 0.02);
+      overflow: hidden;
+      position: relative;
+      z-index: 2;
+      transition: transform 0.2s ease, box-shadow 0.2s ease;
+      border: 1px solid rgba(255, 255, 255, 0.6);
+    }
+
+    .policy-card:hover {
+      transform: translateY(-3px);
+      box-shadow: 0 28px 48px -16px rgba(0, 0, 0, 0.25);
+    }
+
+    /* header with brand */
+    .policy-header {
+      padding: 28px 32px 16px 32px;
+      border-bottom: 1px solid #eef2f6;
+      background: #ffffff;
+    }
+
+    .logo-area {
+      display: flex;
+      align-items: center;
+      gap: 14px;
+      margin-bottom: 12px;
+      flex-wrap: wrap;
+    }
+
+    .logo-icon {
+      width: 52px;
+      height: 52px;
+      background: linear-gradient(135deg, #ff9900, #ffb347);
+      border-radius: 18px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      box-shadow: 0 8px 18px rgba(255, 153, 0, 0.2);
+    }
+
+    .logo-icon svg {
+      width: 28px;
+      height: 28px;
+    }
+
+    .logo-text h1 {
+      font-size: 22px;
+      font-weight: 800;
+      background: linear-gradient(135deg, #1e293b, #3b4b66);
+      background-clip: text;
+      -webkit-background-clip: text;
+      color: transparent;
+      letter-spacing: -0.3px;
+    }
+
+    .logo-text p {
+      font-size: 13px;
+      color: #5b6e8c;
+      font-weight: 500;
+    }
+
+    .badge-zone {
+      display: inline-block;
+      margin-top: 12px;
+    }
+
+    .policy-badge {
+      background: #fee2e2;
+      color: #b91c1c;
+      padding: 4px 12px;
+      border-radius: 40px;
+      font-size: 11px;
+      font-weight: 700;
+      letter-spacing: 0.3px;
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      border: 1px solid #fecaca;
+    }
+
+    /* main content */
+    .policy-body {
+      padding: 28px 32px 36px 32px;
+    }
+
+    .policy-body h2 {
+      font-size: 20px;
+      font-weight: 700;
+      margin: 24px 0 12px 0;
+      color: #0f172a;
+      letter-spacing: -0.2px;
+      border-left: 4px solid #ff9900;
+      padding-left: 14px;
+    }
+
+    .policy-body h2:first-of-type {
+      margin-top: 0;
+    }
+
+    .policy-body h3 {
+      font-size: 15px;
+      font-weight: 600;
+      margin: 20px 0 8px 0;
+      color: #1e293b;
+    }
+
+    .policy-body p {
+      font-size: 14px;
+      line-height: 1.55;
+      color: #2d3a4e;
+      margin-bottom: 14px;
+    }
+
+    .policy-body strong {
+      color: #c2410c;
+      font-weight: 700;
+    }
+
+    .no-refund-emphasis {
+      background: #fff6ed;
+      border-left: 5px solid #dc2626;
+      padding: 16px 20px;
+      border-radius: 20px;
+      margin: 24px 0;
+      box-shadow: 0 2px 8px rgba(0,0,0,0.02);
+    }
+
+    .no-refund-emphasis p {
+      margin-bottom: 6px;
+      font-size: 14px;
+    }
+
+    .no-refund-emphasis .big-text {
+      font-size: 18px;
+      font-weight: 800;
+      color: #b91c1c;
+      letter-spacing: -0.2px;
+      margin-bottom: 8px;
+    }
+
+    .list-styled {
+      padding-left: 22px;
+      margin: 12px 0 18px 0;
+    }
+
+    .list-styled li {
+      margin-bottom: 8px;
+      font-size: 14px;
+      line-height: 1.45;
+      color: #2d3a4e;
+    }
+
+    hr {
+      margin: 28px 0 16px;
+      border: none;
+      height: 1px;
+      background: linear-gradient(90deg, #e2e8f0, #ffd9b5, #e2e8f0);
+    }
+
+    .footer-note {
+      background: #f8fafc;
+      border-radius: 20px;
+      padding: 18px 22px;
+      margin-top: 28px;
+      border: 1px solid #eef2f6;
+      font-size: 13px;
+      color: #475569;
+      display: flex;
+      flex-wrap: wrap;
+      justify-content: space-between;
+      align-items: center;
+      gap: 12px;
+    }
+
+    .footer-note a {
+      color: #ff9900;
+      text-decoration: none;
+      font-weight: 600;
+    }
+
+    .footer-note a:hover {
+      text-decoration: underline;
+    }
+
+    .btn-outline {
+      background: transparent;
+      border: 1px solid #cbd5e1;
+      padding: 8px 18px;
+      border-radius: 30px;
+      font-size: 12px;
+      font-weight: 500;
+      font-family: inherit;
+      cursor: pointer;
+      transition: all 0.2s;
+      color: #1e293b;
+    }
+
+    .btn-outline:hover {
+      background: #f1f5f9;
+      border-color: #ff9900;
+      color: #ff9900;
+    }
+
+    @media (max-width: 550px) {
+      body { padding: 16px; }
+      .policy-header { padding: 20px 20px 12px 20px; }
+      .policy-body { padding: 20px 20px 28px 20px; }
+      .logo-text h1 { font-size: 18px; }
+      .logo-icon { width: 44px; height: 44px; }
+    }
+  </style>
+</head>
+<body>
+<div class="policy-card">
+  <div class="policy-header">
+    <div class="logo-area">
+      <div class="logo-icon">
+        <svg width="28" height="28" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+          <path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm0 4c1.1 0 2 .9 2 2s-.9 2-2 2-2-.9-2-2 .9-2 2-2zm0 13c-2.33 0-4.31-1.46-5.11-3.5h10.22c-.8 2.04-2.78 3.5-5.11 3.5z" fill="white"/>
+        </svg>
+      </div>
+      <div class="logo-text">
+        <h1>Amazon Quick View Pro</h1>
+        <p>Professional product research & cloud analytics</p>
+      </div>
+    </div>
+    <div class="badge-zone">
+      <span class="policy-badge">
+        <span>🔒</span> STRICT NO-REFUND POLICY
+      </span>
+    </div>
+  </div>
+
+  <div class="policy-body">
+    <h2>📜 1. Refund & Cancellation Policy</h2>
+    <p><strong>Last updated: June 1, 2026</strong> – Amazon Quick View Pro (“Extension”, “Software”, “we”, “our”) provides digital subscription services for Amazon product research tools, including <strong>Pro Monthly subscription</strong> and <strong>7‑day free trial</strong>. By purchasing or activating a paid plan, you acknowledge and agree to the <strong>NO‑REFUND policy</strong> described below.</p>
+
+    <div class="no-refund-emphasis">
+      <div class="big-text">⚠️ NO REFUNDS – ALL SALES ARE FINAL</div>
+      <p><strong>Amazon Quick View Pro does not offer refunds, credits, or pro‑rated reimbursements</strong> for any subscription fees, including monthly Pro plans or any other payments. Once a payment is processed (including automatic renewals), the transaction is final and non‑refundable.</p>
+      <p style="margin-top: 8px;">This policy applies regardless of whether you have used the extension, accessed cloud features, or bookmarked products. The 7‑day free trial is provided specifically to evaluate the software before any financial commitment.</p>
+    </div>
+
+    <h2>💡 2. Free Trial & Evaluation Period</h2>
+    <p>We offer a <strong>7-day free trial</strong> with full access to Pro features. The trial is intended to give you sufficient time to test compatibility, performance, profit calculator, BSR extraction, and all research tools. <strong>No refund will be issued if you subscribe and later decide the software does not meet your expectations</strong> — the trial period eliminates the need for a money‑back guarantee.</p>
+    <ul class="list-styled">
+      <li>✔ The trial starts immediately after you accept the plan selection and begins on our servers.</li>
+      <li>✔ You may cancel the subscription at any time from your Paddle customer portal or extension settings. Cancellation prevents future renewals but does not entitle you to a refund of already paid amounts.</li>
+      <li>✔ If you forget to cancel before the trial ends and your Pro plan renews, <strong>no refund will be given</strong> – the subscription will remain active for the full paid period.</li>
+    </ul>
+
+    <h2>💳 3. Recurring Billing & Cancellation</h2>
+    <p>Pro Monthly subscriptions renew automatically each month via Paddle (our authorized payment provider). By subscribing, you authorize automatic charges until you cancel. <strong>Cancellation must be done before the renewal date to avoid future charges.</strong> After cancellation, you will retain access until the end of the current billing cycle; no partial refunds are available for unused time.</p>
+    <ul class="list-styled">
+      <li>• <strong>No refunds for unused subscription periods</strong> (e.g., cancelling mid‑month does not produce a refund or credit).</li>
+      <li>• Price changes will be communicated at least 14 days in advance, and you may cancel prior to the change to avoid new pricing.</li>
+      <li>• Downgrading from a paid plan to free is not available – after cancellation, your account reverts to expired status and you lose access to research features.</li>
+    </ul>
+
+    <h2>⚠️ 4. Exceptions & Technical Issues</h2>
+    <p>We stand behind the quality of Amazon Quick View Pro. If the extension is completely non‑functional due to a verified bug that prevents core research features (price extraction, BSR, profit calculator) for <strong>more than 5 consecutive days</strong>, we will investigate and may offer a pro‑rated account credit at our sole discretion. <strong>This does not constitute a cash refund.</strong></p>
+    <ul class="list-styled">
+      <li>• Temporary service interruptions, CAPTCHA blocks, or Amazon HTML changes are beyond our control and do not qualify for refunds.</li>
+      <li>• Compatibility issues with specific devices, browsers, or third‑party extensions must be reported during the trial period.</li>
+      <li>• If you decide to stop using the software for any personal or business reason, no refund will be provided.</li>
+    </ul>
+
+    <h2>📧 5. Support & Fair Use</h2>
+    <p>We offer email support and documentation. Our team is committed to resolving technical issues promptly, but <strong>support delays do not justify refunds</strong>. Disputes regarding the “no‑refund” policy will be resolved at our discretion. Chargebacks or payment disputes initiated with your bank or Paddle are prohibited and may result in immediate termination of your account and future ban from the service.</p>
+    <p>By using Amazon Quick View Pro, you explicitly waive any right to a refund or reversal of charges for any reason except as expressly stated in this policy.</p>
+
+    <hr />
+
+    <h2>⚖️ 6. Legal & Acceptance</h2>
+    <p>This Refund Policy is part of our Terms of Service. By subscribing to the Pro plan or using the paid version of the extension, you confirm that you have read, understood, and agreed to the <strong>NO‑REFUND</strong> terms. If you do not agree, you must not subscribe and should discontinue use of the extension. The 7‑day free trial serves as your opportunity to test the software without financial risk. <strong>All sales are final.</strong></p>
+    <p>For questions or subscription management, please contact our support team at <strong>support@amazonquickviewpro.com</strong> or through the extension’s Settings panel (Manage Subscription).</p>
+
+    <div class="footer-note">
+      <span>© 2026 Amazon Quick View Pro – All rights reserved.</span>
+      <div>
+        <button id="printPolicyBtn" class="btn-outline">🖨️ Print / Save PDF</button>
+      </div>
+    </div>
+
+    <p style="font-size: 11px; margin-top: 24px; text-align: center; color: #7c8ba0; border-top: 1px solid #ecf3f9; padding-top: 18px;">
+      ⚡ By accessing this policy page you accept that NO refunds will be issued for any subscription or payment made to Amazon Quick View Pro.
+    </p>
+  </div>
+</div>
+
+<script>
+  (function() {
+    // Print / PDF generation helper
+    const printBtn = document.getElementById('printPolicyBtn');
+    if (printBtn) {
+      printBtn.addEventListener('click', (e) => {
+        e.preventDefault();
+        window.print();
+      });
+    }
+
+    // optional: add date update consistency (display current year)
+    const yearSpan = document.querySelector('.footer-note span');
+    if (yearSpan && yearSpan.innerText.includes('2026')) {
+      // keep as is, just to ensure dynamic year if needed
+      // but we keep explicit to match policy final update
+    }
+  })();
+</script>
+
+<style media="print">
+  body {
+    background: white;
+    padding: 0;
+    margin: 0;
+  }
+  .policy-card {
+    box-shadow: none;
+    border-radius: 0;
+    background: white;
+    max-width: 100%;
+  }
+  .btn-outline {
+    display: none;
+  }
+  .policy-badge {
+    background: #f1f5f9;
+    color: #1e293b;
+    border: 1px solid #cbd5e1;
+  }
+  .no-refund-emphasis {
+    background: #fff1ed;
+    border-left: 4px solid #b91c1c;
+  }
+  body::before {
+    display: none;
+  }
+  .footer-note {
+    background: #f8fafc;
+  }
+</style>
+</body>
+</html>
