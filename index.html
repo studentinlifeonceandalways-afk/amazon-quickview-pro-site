@@ -505,7 +505,7 @@
                         <li><i class="fas fa-star" style="color:#ffaa33;"></i> <strong>Try every Pro feature free for 7 days</strong></li>
                     </ul>
                     <div style="margin-top: 1.8rem;">
-                        <a href="#" class="btn-primary" style="display:inline-block; font-size: 1.1rem; padding: 0.8rem 2rem;"><i class="fab fa-chrome"></i> Start 7-Day Trial</a>
+                        <a href="#" class="btn-primary" id="startTrialBtn" style="display:inline-block; font-size: 1.1rem; padding: 0.8rem 2rem;"><i class="fab fa-chrome"></i> Start 7-Day Trial</a>
                         <p style="font-size: 0.7rem; margin-top: 1rem; color:#5f6c7a;">No commitment. After trial, only $14/month. Cancel anytime.</p>
                     </div>
                 </div>
@@ -538,7 +538,7 @@
             <div><i class="fas fa-chart-line"></i> Amazon Quick View Pro © 2026<br><span style="font-size:0.75rem;">Unofficial Amazon partner tool</span></div>
             <div><strong>Learn</strong><br><a href="https://amazonquickview.net/how-to-guide.html" target="_blank"><i class="fas fa-book-open"></i> How to Use Guide</a></div>
             <div><strong>Legal</strong><br><a href="#" id="privacyFooter">Privacy Policy</a><br><a href="#" id="termsFooter">Terms of Service</a></div>
-            <div><strong>Contact</strong><br><i class="fas fa-envelope"></i> support@quickviewpro.dev</div>
+            <div><strong>Contact</strong><br><a href="mailto:siddharthakwatra@protonmail.com" style="color: #ffaa44; text-decoration: none;"><i class="fas fa-envelope"></i> siddharthakwatra@protonmail.com</a></div>
         </div>
         <div style="margin-top: 2rem; font-size:0.7rem; text-align:center;">Amazon, FBA, and the Amazon logo are trademarks of Amazon.com, Inc. This extension is not affiliated with Amazon.</div>
     </div>
@@ -615,9 +615,11 @@
         if(e.target.classList.contains('modal-overlay')) closeModal(e.target);
     };
     
-    // Chrome Web Store link - placeholder will be replaced with actual extension ID upon publication
-    const chromeUrl = "https://chrome.google.com/webstore/detail/amazon-quick-view-pro/YOUR_EXTENSION_ID";
-    const installBtns = document.querySelectorAll('#installCta, #installBtn');
+    // Chrome Web Store link - using your extension ID: lgaokapcbmelnfbgiajmlenanfhffalj
+    const chromeUrl = "https://chrome.google.com/webstore/detail/lgaokapcbmelnfbgiajmlenanfhffalj";
+    
+    // Link all install buttons to Chrome Web Store
+    const installBtns = document.querySelectorAll('#installCta, #installBtn, #startTrialBtn');
     installBtns.forEach(btn => {
         btn.href = chromeUrl;
         btn.target = "_blank";
