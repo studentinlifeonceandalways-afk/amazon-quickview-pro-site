@@ -321,6 +321,10 @@
             text-decoration: none;
         }
 
+        .footer a:hover {
+            text-decoration: underline;
+        }
+
         .modal-overlay {
             position: fixed;
             top: 0;
@@ -397,7 +401,7 @@
                 <a href="#marketplaces">Marketplaces</a>
                 <a href="#pricing">Pricing</a>
                 <a href="https://amazonquickview.net/how-to-guide.html" target="_blank" class="how-to-link"><i class="fas fa-book-open"></i> How to Use</a>
-                <a href="#" id="privacyLink">Privacy</a>
+                <a href="https://amazonquickview.net/privacy-policy.html" target="_blank" rel="noopener noreferrer">Privacy</a>
                 <a href="#" id="termsLink">Terms</a>
                 <a href="#" class="btn-outline" id="installBtn"><i class="fab fa-chrome"></i> Add to Chrome</a>
             </div>
@@ -537,25 +541,14 @@
         <div style="display: flex; justify-content: space-between; flex-wrap: wrap; gap: 2rem;">
             <div><i class="fas fa-chart-line"></i> Amazon Quick View Pro © 2026<br><span style="font-size:0.75rem;">Unofficial Amazon partner tool</span></div>
             <div><strong>Learn</strong><br><a href="https://amazonquickview.net/how-to-guide.html" target="_blank"><i class="fas fa-book-open"></i> How to Use Guide</a></div>
-            <div><strong>Legal</strong><br><a href="#" id="privacyFooter">Privacy Policy</a><br><a href="#" id="termsFooter">Terms of Service</a></div>
+            <div><strong>Legal</strong><br><a href="https://amazonquickview.net/privacy-policy.html" target="_blank" rel="noopener noreferrer">Privacy Policy</a><br><a href="#" id="termsFooter">Terms of Service</a></div>
             <div><strong>Contact</strong><br><a href="mailto:siddharthakwatra@protonmail.com" style="color: #ffaa44; text-decoration: none;"><i class="fas fa-envelope"></i> siddharthakwatra@protonmail.com</a></div>
         </div>
         <div style="margin-top: 2rem; font-size:0.7rem; text-align:center;">Amazon, FBA, and the Amazon logo are trademarks of Amazon.com, Inc. This extension is not affiliated with Amazon.</div>
     </div>
 </footer>
 
-<div id="privacyModal" class="modal-overlay">
-    <div class="modal-content">
-        <div class="modal-close">&times;</div>
-        <h2>Privacy Policy</h2>
-        <p><strong>Last updated:</strong> May 2026</p>
-        <p>Amazon Quick View Pro respects your privacy. This extension does not collect, store, or share any personally identifiable information. All research profiles, product bookmarks, and settings are stored locally in your browser using Chrome's sync storage. No data is transmitted to external servers except for optional exchange rate fetching (via Cloudflare Worker) and bulk ASIN checks performed through our GDPR-compliant proxy worker which does NOT log ASINs permanently. We do not track browsing history or share any data with third parties.</p>
-        <p><strong>Data usage:</strong> The extension accesses Amazon product pages only when you actively browse them. No analytics, no cookies.</p>
-        <p>By using this extension, you agree to the local storage of your research profiles.</p>
-        <p><strong>Data Deletion:</strong> All data can be removed by uninstalling the extension or clearing Chrome's storage.</p>
-    </div>
-</div>
-
+<!-- Terms Modal (Privacy modal removed - now opens external page) -->
 <div id="termsModal" class="modal-overlay">
     <div class="modal-content">
         <div class="modal-close">&times;</div>
@@ -587,11 +580,8 @@
         });
     });
 
-    // Modal logic
-    const privacyModal = document.getElementById('privacyModal');
+    // Terms Modal logic (Privacy now opens external link, no modal)
     const termsModal = document.getElementById('termsModal');
-    const privacyLink = document.getElementById('privacyLink');
-    const privacyFooter = document.getElementById('privacyFooter');
     const termsLink = document.getElementById('termsLink');
     const termsFooter = document.getElementById('termsFooter');
     const closeBtns = document.querySelectorAll('.modal-close');
@@ -599,8 +589,6 @@
     function openModal(modal) { modal.style.display = 'flex'; document.body.style.overflow = 'hidden'; }
     function closeModal(modal) { modal.style.display = 'none'; document.body.style.overflow = ''; }
     
-    if(privacyLink) privacyLink.onclick = (e) => { e.preventDefault(); openModal(privacyModal); };
-    if(privacyFooter) privacyFooter.onclick = (e) => { e.preventDefault(); openModal(privacyModal); };
     if(termsLink) termsLink.onclick = (e) => { e.preventDefault(); openModal(termsModal); };
     if(termsFooter) termsFooter.onclick = (e) => { e.preventDefault(); openModal(termsModal); };
     
